@@ -9,12 +9,14 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
 ## Installation
 
-Run
+- Install dependencies using `npm install`
+- 
+  Run
 
-```
-npm start
-```
-in the project root directory and visit `localhost:3000` to view the live application.
+  ```
+  npm start
+  ```
+  in the project root directory and visit `localhost:3000` to view the live application.
 
 
 ## How to Contribute
