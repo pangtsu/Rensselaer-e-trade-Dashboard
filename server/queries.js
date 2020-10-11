@@ -7,7 +7,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 // postgres connection string
-var connectionString = 'postgres://localhost:5432/item';
+var connectionString = 'postgres://localhost:5433/item';
 var db = pgp(connectionString);
 
 
@@ -29,8 +29,8 @@ function getSingleItem(req, res, next) {
 
 function createItem(req, res, next) {
     req.body.price = parseInt(req.body.price);
-    db.none('insert into items(itemName, user, price, category)' +
-            'values(${itemName}, ${user}, ${price}, ${category})',
+    db.none('insert into items(itemName, price, category)' +
+            'values(${itemName}, ${price}, ${category})',
             req.body)
         .then(function () {
             res.status(200)
@@ -45,8 +45,8 @@ function createItem(req, res, next) {
 }
 
 function updateItem(req, res, next) {
-    db.none('update items set itemName=$1, user=$2, price=$3, category=$4 where id=$5',
-            [req.body.itemName, req.body.user, parseInt(req.body.price),
+    db.none('update items set itemName=$1, price=$3, category=$4 where id=$5',
+            [req.body.itemName, parseInt(req.body.price),
                 req.body.category, parseInt(req.params.id)
             ])
         .then(function () {
