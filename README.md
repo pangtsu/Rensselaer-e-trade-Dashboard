@@ -19,4 +19,6 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
   in the project root directory and visit `localhost:3000` to view the live application.
 
 
+If there's a problem with the `concurrently` dependency, run this command `npm i concurrently --save-dev` in the root directory to manually install it.
+
 ## How to Contribute
