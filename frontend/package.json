@@ -2,35 +2,32 @@
   "name": "red-frontend",
   "version": "1.0.0",
   "description": "Frontend for RED.",
-  "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
-    "test": "jest"
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "webpack --progress --colors --mode=production",
+    "start": "webpack-dev-server --config webpack.config.js --progress --colors --open --mode=development"
   },
-  "keywords": [
-    "react",
-    "typescript",
-    "webpack"
-  ],
-  "author": "Grant Bartlett",
   "license": "MIT",
-  "dependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
-  },
   "devDependencies": {
-    "jest": "^24.9.0",
-    "ts-jest": "^24.3.0",
-    "@types/jest": "^24.0.25",
-    "@types/react": "^16.8.1",
-    "@types/react-dom": "^16.0.11",
-    "awesome-typescript-loader": "^5.2.1",
-    "html-webpack-plugin": "^3.2.0",
-    "source-map-loader": "^0.2.4",
-    "typescript": "^3.3.1",
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "@babel/core": "7.11.6",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.11.0",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-react": "7.10.4",
+    "@babel/preset-typescript": "7.10.4",
+    "babel-loader": "8.1.0",
+    "fork-ts-checker-webpack-plugin": "5.2.0",
+    "html-webpack-plugin": "4.5.0",
+    "typescript": "4.0.3",
+    "webpack": "4.44.2",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "@types/react": "16.9.50",
+    "@types/react-dom": "16.9.8",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   }
 }

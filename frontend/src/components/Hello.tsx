@@ -1,19 +1,9 @@
+import React, { SFC } from 'react';
 
-import * as React from "react";
-
-export interface IHelloProps
-{
-    test: string;
+export interface HelloProps {
+  name: string;
 }
 
-export class Hello extends React.Component<IHelloProps, {}>
-{
-    public render(): JSX.Element
-    {
-        return (
-            <>
-                {this.props.test}
-            </>
-        );
-    }
-}
+export const Hello: SFC<HelloProps> = ({ name }) => (
+  <h1>{ name }</h1>
+);

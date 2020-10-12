@@ -1,32 +1,26 @@
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const APP_PATH = path.resolve(__dirname, 'src');
 
 module.exports = {
-    entry: {
-        app: ['./src/app.ts'],
-        vendor: ['react', 'react-dom']
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].bundle.js'
-    },
-    devtool: "source-map",
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
-            }
-        ]
-    },
+  entry: APP_PATH,
 
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./index.html"
-        })
-    ]
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
+
+  module: {
+    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({ inject: true, template: path.join(APP_PATH, 'index.html') }),
+    new ForkTsCheckerWebpackPlugin(),
+  ]
 };
