@@ -10,5 +10,5 @@ CREATE TABLE items (
   category VARCHAR
 );
 
-INSERT INTO items (itemName,  price, category)
-  VALUES ('AC',  120, 'utility');
+INSERT INTO items (ID, itemName,  price, category)
+  VALUES (1, 'AC',  120, 'utility');
