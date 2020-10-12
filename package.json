@@ -4,7 +4,7 @@
   "description": "## Overview Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!",
   "main": "index.js",
   "scripts": {
-    "client": "cd front && npm start",
+    "client": "cd frontend && npm run dev",
     "server": "cd server && npm start",
     "start": "concurrently --kill-others \"npm run server\" \"npm run client\""
   },
