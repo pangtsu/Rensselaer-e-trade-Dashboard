@@ -1,9 +1,11 @@
 # Rensselaer-e-trade-Dashboard
 
 ## Overview
+
 Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!
 
 ## Requirement
+
 - node
 - postgreSQL
 
@@ -16,15 +18,16 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
   ```
   psql -f items.sql
   ```
+
   to create and seed the Postgres database
-  
-- 
-  Run
+
+- Run
 
   ```
   npm start
   ```
-  in the project root directory and visit `localhost:3000` to view the live application.
+
+  in the project root directory and visit `localhost:8080` to view the live application.
 
 - Once the application is up and running, you may use the `localhost:3001/api/item` endpoint to access the backend API.
 
@@ -36,4 +39,5 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 ## How to Contribute
 
 contact me via
+
 - [email](mailto:jiawenlincontact@gmail.com?Subject=Hi!)
