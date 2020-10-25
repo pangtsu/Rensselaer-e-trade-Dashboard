@@ -32,9 +32,9 @@ export default class Dashboard extends React.Component<Props, State> {
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
-  private onSearchHandler(searchPhrase: any) {
+  private onSearchHandler(searchInput: any) {
     this.setState({
-      searchTerm: searchPhrase
+      searchTerm: searchInput
     });
   }
 

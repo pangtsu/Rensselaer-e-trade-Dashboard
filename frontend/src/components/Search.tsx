@@ -1,10 +1,9 @@
 import React from "react";
 import { Input } from "antd";
-//import "antd/es/input/style/index.css";
 import "./App.css";
 
 export interface Props {
-  onSearchCallBack(value: any): void;
+  onSearchCallBack(searchInput: any): void;
 }
 
 export interface State {
@@ -20,9 +19,9 @@ export default class Search extends React.Component<Props, State> {
     this.onSearch = this.onSearch.bind(this);
   }
 
-  private onSearch(value: any) {
-    console.log(value);
-    this.props.onSearchCallBack(value);
+  private onSearch(searchInput: any) {
+    console.log(searchInput);
+    this.props.onSearchCallBack(searchInput);
   }
 
   render() {
