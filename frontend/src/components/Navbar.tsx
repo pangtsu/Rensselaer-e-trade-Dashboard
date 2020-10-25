@@ -11,7 +11,14 @@ export default class Navbar extends React.Component{
   render() {
 
     return (
+        <React.Fragment>
+            <div>
+
+            </div>
             <Menu  mode="horizontal" theme = "dark" >
+            <div>
+                
+                </div>
                 <Menu.Item key="profile" >
                     Profile
                 </Menu.Item>
@@ -22,6 +29,7 @@ export default class Navbar extends React.Component{
                     Logout
                 </Menu.Item>
             </Menu>
+        </React.Fragment>
     );
   }
 }
