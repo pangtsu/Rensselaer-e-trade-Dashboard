@@ -16,11 +16,27 @@ module.exports = {
   },
 
   module: {
-    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }],
+    rules: [{
+        test: /\.(ts|js)x?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: "css-loader"
+        }]
+      }
+    ],
   },
 
   plugins: [
-    new HtmlWebpackPlugin({ inject: true, template: path.join(APP_PATH, 'index.html') }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.join(APP_PATH, 'index.html')
+    }),
     new ForkTsCheckerWebpackPlugin(),
   ]
 };

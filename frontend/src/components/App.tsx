@@ -1,10 +1,8 @@
-import React from 'react';
-import { Counter } from './Counter';
-import { Hello } from './Hello';
+import React from "react";
+import Dashboard from "./Dashboard";
 
 export const App = () => (
   <>
-    <Hello name={ 'react-webpack-typescript-babel' } />
-    <Counter />
+    <Dashboard />
   </>
 );

@@ -5,6 +5,7 @@
 ## Starting the development server
 
 ```shell
+npm install
 npm start
 ```
 
