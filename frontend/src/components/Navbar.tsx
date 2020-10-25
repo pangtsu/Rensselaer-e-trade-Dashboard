@@ -1,35 +1,30 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu,Typography } from "antd";
 import "./App.css";
 
-
+const {Title} = Typography;
 
 export default class Navbar extends React.Component{
-
-
    
   render() {
 
     return (
-        <React.Fragment>
-            <div>
-
+        <div id = "myNav">
+            <div id = "logo">
+            <Title level={2}>RED</Title>
             </div>
             <Menu  mode="horizontal" theme = "dark" >
-            <div>
-                
-                </div>
-                <Menu.Item key="profile" >
-                    Profile
+                <Menu.Item key="profile">
+                    <a href="">Profile</a>
                 </Menu.Item>
-                <Menu.Item key="Issues" >
-                    Issues
+                <Menu.Item key="issues">
+                    <a href="">Issues</a>
                 </Menu.Item>
-                <Menu.Item key="logout" >
-                    Logout
+                <Menu.Item key="logout">
+                    <a href="">Logout</a>
                 </Menu.Item>
             </Menu>
-        </React.Fragment>
+       </div>
     );
   }
 }
