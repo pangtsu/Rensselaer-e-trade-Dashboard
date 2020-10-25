@@ -26,7 +26,7 @@ export default class Search extends React.Component<Props, State> {
 
   render() {
     return (
-      <React.Fragment>
+     <React.Fragment>
         <Input.Search
           placeholder="Search Your Item"
           allowClear
@@ -34,7 +34,7 @@ export default class Search extends React.Component<Props, State> {
           size="large"
           onSearch={this.onSearch}
         />
-      </React.Fragment>
+     </React.Fragment>
     );
   }
 }
