@@ -36,15 +36,6 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 - If there's a problem with the `concurrently` dependency, run this command `npm i concurrently --save-dev` in the root directory to manually install it.
 - If you are a Mac user, you may follow this [blog post](https://dataschool.com/learn-sql/how-to-start-a-postgresql-server-on-mac-os-x/) to get PostgreSQL installed.
 
-## How to Contribute
-
-contact me via
-
-- [email](mailto:jiawenlincontact@gmail.com?Subject=Hi!)
-
-to get access to this repo or simply create a PR.
-
-
 ## Code of Conduct
 
 
@@ -64,3 +55,11 @@ git push
 Commit messages should be concise and self-explanatory, just like branch names.
 
 Once your have completed your feature or fixed you bug, please perform a Pull Request into master, even if you are an admin. Pull requests provide a more readable commit log, highlighting major features and changes. On the Github repository website, click new pull request and select "master" <- "your branch name". This requires an admin to approve your changes before they are live on the develop branch.
+
+## How to Contribute
+
+contact me via
+
+- [email](mailto:jiawenlincontact@gmail.com?Subject=Hi!)
+
+to get access to this repo or simply create a PR.
