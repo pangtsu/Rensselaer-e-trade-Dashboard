@@ -14,8 +14,15 @@
 #header{
     padding: 20px 20px;
    margin-bottom: 20px;
+  
 }
 
+#searchbar{
+    float: left;
+    width: 370px;
+    position: relative;
+    top: 20px;
+}
 .sell{
     position: relative;
     top: 40px;
@@ -58,7 +65,7 @@
 }
 
 #logo {
-   width: 100px;
+   width: 130px;
     line-height: 54px;
     margin: 20 20px;
     margin-right: 40px;

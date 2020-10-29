@@ -1,8 +1,7 @@
 import React from "react";
 import { Menu,Typography } from "antd";
-
 import "./App.css";
-
+import Search from "./Search"
 const {Title} = Typography;
 
 export interface Props {}
@@ -10,8 +9,6 @@ export interface Props {}
 export interface State {
   searchTerm: string;
 }
-
-
 
 
 export default class Navbar extends React.Component<Props, State>{
@@ -37,10 +34,10 @@ export default class Navbar extends React.Component<Props, State>{
         <div id = "myNav">
             <Menu theme = "dark">
             <div id = "logo">
-                <Title style={{color: 'white'}} level={2}>RED</Title>
+                <Title style={{color: 'white'}} level={1}>RED</Title>
             </div>
             <div id = "searchbar">
-               
+              <Search  onSearchCallBack={this.onSearchHandler}/>
             </div>
             <div id = "menu-chice" style ={{float:'right'}}>
                 <Menu  mode="horizontal" theme = "dark"  >               
