@@ -24,11 +24,10 @@ export default class Dashboard extends React.Component{
               </div>
             </div>
         </Header>
+     
+        <Filter />  
         
-        <Content id = "content">
-                <Filter />  
-        </Content>
-  
+        <Content />
     </Layout>
         </div>
     ); 
