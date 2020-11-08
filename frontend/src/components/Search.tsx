@@ -26,15 +26,16 @@ export default class Search extends React.Component<Props, State> {
 
   render() {
     return (
-     <React.Fragment>
+     
         <Input.Search
+          style = {{marginBottom: 16}}
           placeholder="Search Your Item"
           allowClear
           enterButton="Search"
-          size="large"
+          size="middle"
           onSearch={this.onSearch}
         />
-     </React.Fragment>
+    
     );
   }
 }
