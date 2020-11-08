@@ -4,6 +4,7 @@ import "./App.css";
 const { Header, Content } = Layout;
 import Navbar from "./Navbar";
 import Filter from "./Filter";
+import { searchItem } from "./../utils/search";
 
 export interface Props {}
 
@@ -11,7 +12,7 @@ export interface State {
   searchTerm: string;
 }
 
-export default class Dashboard extends React.Component {
+export default class Dashboard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -24,6 +25,11 @@ export default class Dashboard extends React.Component {
     this.setState({
       searchTerm: searchInput
     });
+    this.search();
+  }
+
+  private search() {
+    searchItem(this.state.searchTerm);
   }
 
   render() {
