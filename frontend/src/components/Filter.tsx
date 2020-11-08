@@ -1,11 +1,13 @@
 
   
 import React from "react";
-import { Form,DatePicker,Select} from "antd";
+import { Form,DatePicker,Select, Button} from "antd";
+
 import "./App.css";
 
 
 const  {Option} = Select;
+
 
 export default class Filter extends React.Component{
  onFinish = (fieldsValue:any) => {
@@ -19,25 +21,20 @@ export default class Filter extends React.Component{
   render() {
 
     return (
-        <div className = "filter">
-            <Form name = "filter-date" onFinish = {this.onFinish}>
-                <Form.Item name = "date-picker" id = "start-date">
+        <>
+        <div className="filter">
+            <Form name="filter-date" onFinish={this.onFinish}>
+                <Form.Item name="date-picker" id="start-date">
                     <DatePicker />
                 </Form.Item>
-                <Form.Item name = "date-picker" id = "end-date">
+                <Form.Item name="date-picker" id="end-date">
                     <DatePicker />
                 </Form.Item>
                 <Form.Item
                     name="select"
                     label="Select"
-                    hasFeedback
-                   rules={[
-                     {
-                     required: true,
-                         message: 'Please select a price range',
-                        },
-                        ]} >
-                    <Select placeholder="Please select a price range">
+                    id = "select">
+                    <Select placeholder="Please select a price range" style={{ width: 120 }}>
                         <Option value="below-50">below 50</Option>
                         <Option value="50-100">50-100</Option>
                         <Option value="100-200">100-200</Option>
@@ -48,14 +45,8 @@ export default class Filter extends React.Component{
                 <Form.Item
                     name="Category"
                     label="Category"
-                    hasFeedback
-                   rules={[
-                     {
-                     required: true,
-                         message: 'Please select category',
-                        },
-                        ]} >
-                    <Select placeholder="Please select category">
+                    id = "category">
+                    <Select placeholder="Please select category" style={{ width: 200 }}>
                         <Option value="furnitures">furnitures</Option>
                         <Option value="electronic devices">electronic devices</Option>
                         <Option value="clothing-accesory">clothing&accesory</Option>
@@ -63,11 +54,20 @@ export default class Filter extends React.Component{
                         <Option value="school-lab">school&lab</Option>
                     </Select>
                 </Form.Item>
-     
+                <Form.Item>
+                <Button type="primary" htmlType="submit" id = "apply">
+                    apply
+                </Button>
+                <Button type="primary" htmlType="submit" id = "cancel">
+                    cancel
+                </Button>
+      </Form.Item>
             </Form>
-        
-
         </div>
+
+            <div className="display">
+        </div>
+        </>
     ); 
    }
 }

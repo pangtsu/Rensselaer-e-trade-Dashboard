@@ -1,9 +1,10 @@
 import React from "react";
-import { Layout, Button } from "antd";
+import { Layout} from "antd";
 import "./App.css";
 const { Header, Content } = Layout;
 import Navbar from "./Navbar";
 import Filter from "./Filter";
+import Sell from "./Sell";
 import { searchItem } from "./../utils/search";
 
 export interface Props {}
@@ -32,23 +33,23 @@ export default class Dashboard extends React.Component<Props, State> {
     searchItem(this.state.searchTerm);
   }
 
+  
+
   render() {
     return (
       <div id="mydash">
         <Layout>
+          <>
           <Header id="header" style={{ background: "#f0f2f5" }}>
             <Navbar onSearchCallBack={this.onSearchHandler} />
             <div className="sell">
               <div className="buttonsell">
-                <Button id="butt" style={{ color: "white" }}>
-                  Sell
-                </Button>
+                <Sell />
               </div>
             </div>
           </Header>
-
           <Filter />
-
+          </>
           <Content />
         </Layout>
       </div>

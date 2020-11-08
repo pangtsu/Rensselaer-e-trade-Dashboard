@@ -77,11 +77,18 @@
 
 .filter{
     background-color: #ececec;;
-   
     top: 100px;
     position: relative;
-    height: 200px;
+    height: 280px;
     margin: auto;
     width: 50%;
     border: 3px  green;
+}
+
+#apply{
+    float: right;
+    position: in-line;
+}
+#cancel{
+    
 }
