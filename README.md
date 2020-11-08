@@ -30,7 +30,12 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
   in the project root directory and visit `localhost:8080` to view the live application.
 
 - Once the application is up and running, you may use the `localhost:8000/api/item` endpoint to access the backend API.
-  i.e., `http://localhost:8000/api/item/AC` shall return `{"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}`
+
+  i.e., `http://localhost:8000/api/item/AC` shall return
+
+  ```
+  {"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}
+  ```
 
 ## Troubleshooting
 
