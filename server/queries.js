@@ -11,15 +11,16 @@ var connectionString = 'postgres://localhost:5432/item';
 var db = pgp(connectionString);
 
 
-function getSingleItem(req, res, next) {
-    var itemID = parseInt(req.params.id);
-    db.one('select * from items where id = $1', itemID)
+function getItem(req, res, next) {
+    var itemKey = req.params.key;
+    console.log(itemKey);
+    db.many("select * from items where itemName = $1", itemKey)
         .then(function (data) {
             res.status(200)
                 .json({
                     status: 'success',
                     data: data,
-                    message: 'Retrieved ONE item'
+                    message: 'Retrieved item'
                 });
         })
         .catch(function (err) {
@@ -79,7 +80,7 @@ function removeItem(req, res, next) {
 
 
 module.exports = {
-    getSingleItem: getSingleItem,
+    getItem: getItem,
     createItem: createItem,
     updateItem: updateItem,
     removeItem: removeItem
