@@ -29,7 +29,8 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
   in the project root directory and visit `localhost:8080` to view the live application.
 
-- Once the application is up and running, you may use the `localhost:3001/api/item` endpoint to access the backend API.
+- Once the application is up and running, you may use the `localhost:8000/api/item` endpoint to access the backend API.
+  i.e., `http://localhost:8000/api/item/AC` shall return `{"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}`
 
 ## Troubleshooting
 
@@ -38,18 +39,17 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
 ## Code of Conduct
 
-
 When making a new feature or a bug fix, please make a new branch from Master or the branch you're trying to modify. On your command line, run
 
-git checkout **(original branch name)** 
-git branch [new branch name] 
+git checkout **(original branch name)**
+git branch [new branch name]
 git checkout [new branch name]
 
 Branch names should be concise and self-explanatory. Please make your branch names lowercase and use hyphens (-) for spaces. You don't need to prepend your branch name with or include other details such as your name. For example, a feature branch for updating the about page UI might be called about-styles or about-page-ui.
 
 When you have changes to your local code base in your new branch, commit push them with
 
-git commit -m [Commit message] 
+git commit -m [Commit message]
 git push
 
 Commit messages should be concise and self-explanatory, just like branch names.
