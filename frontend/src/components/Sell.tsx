@@ -37,7 +37,7 @@ export default class Sell extends React.Component {
         </Button>
         <Modal
           visible={visible}
-          title="Title"
+          title="Create your new product"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
