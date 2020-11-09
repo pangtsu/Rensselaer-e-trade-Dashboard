@@ -1,10 +1,11 @@
 import React from "react";
-import { Layout} from "antd";
+import { Layout,  Breadcrumb} from "antd";
 import "./App.css";
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 import Navbar from "./Navbar";
 import Filter from "./Filter";
 import Sell from "./Sell";
+import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
 
 export interface Props {}
@@ -48,9 +49,20 @@ export default class Dashboard extends React.Component<Props, State> {
               </div>
             </div>
           </Header>
-          <Filter />
+          <Content id = "header2">
+               <Filter />
+          </Content>
           </>
-          <Content />
+          <Content  style={{ padding: '0 50px' }}>
+              <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>Product</Breadcrumb.Item>   
+          </Breadcrumb>
+      <div className="board">
+          <Boardcontent />
+      </div>
+    </Content>
+    <Footer  style={{ textAlign: 'center' }}>RED ©2020 Created by Rensselaer-e-Dashboard</Footer>
         </Layout>
       </div>
     );

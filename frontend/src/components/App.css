@@ -8,13 +8,13 @@
 
 #myNav{
 
-  height: 50px;
+  height: 70px;
 }
 
 #header{
     padding: 20px 20px;
-   margin-bottom: 20px;
-  
+   height: 200px;
+   
 }
 
 #searchbar{
@@ -39,7 +39,6 @@
 
 #butt{
      height: 30px;
-     left: 200px;
      float: right;
      top: 5px;
      background-color: #5c0011;
@@ -77,11 +76,10 @@
 
 .filter{
     background-color: #ececec;;
-    top: 100px;
     position: relative;
-    height: 280px;
+    height: auto;
     margin: auto;
-    width: 50%;
+    width: 70%;
     border: 3px  green;
 }
 
@@ -89,6 +87,12 @@
     float: right;
     position: in-line;
 }
-#cancel{
-    
+
+#header2{
+    top:70px;
 }
+.board {
+    min-height: 280px;
+    padding: 24px;
+    background: #fff;
+  }
