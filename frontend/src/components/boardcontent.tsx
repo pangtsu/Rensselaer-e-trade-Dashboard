@@ -27,12 +27,14 @@ export default class boardcontent extends React.Component<Props, State> {
         dataSource={this.props.dataArray}
         footer={
           <div>
-            <b>search results found:</b> {1}
+            <b>search results found:</b> {this.props.dataArray.length}
           </div>
         }
         renderItem={item => (
           <List.Item
-            key={"AC"}
+            // There will be compiler warning or error with "unknown object"
+            // due to typescript object syntax but just ignore it for now
+            key={item ? item.itemname : "none"}
             extra={
               <img
                 width={272}
@@ -49,11 +51,14 @@ export default class boardcontent extends React.Component<Props, State> {
                   }
                 />
               }
-              title={<a href={"https://ant.design"}>{"AC"}</a>}
-              description={"Ac"}
+              title={
+                <a href={"https://ant.design"}>
+                  {item ? item.itemname : "none"}
+                </a>
+              }
+              description={item ? item.price : 0}
             />
-            {"utility"}
-            {item ? "A" : "B"}
+            {item ? item.utility : "none"}
           </List.Item>
         )}
       />
