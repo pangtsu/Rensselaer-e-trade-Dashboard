@@ -7,4 +7,5 @@ export async function searchItem(inputstring: string) {
   });
   let data = res.data;
   console.log(data);
+  return data;
 }

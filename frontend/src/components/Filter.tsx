@@ -1,11 +1,13 @@
 
   
 import React from "react";
-import { Form,DatePicker,Select} from "antd";
+import { DatePicker,Select,Card, Button, Row, Col} from "antd";
+
 import "./App.css";
 
 
 const  {Option} = Select;
+
 
 export default class Filter extends React.Component{
  onFinish = (fieldsValue:any) => {
@@ -19,55 +21,48 @@ export default class Filter extends React.Component{
   render() {
 
     return (
-        <div className = "filter">
-            <Form name = "filter-date" onFinish = {this.onFinish}>
-                <Form.Item name = "date-picker" id = "start-date">
-                    <DatePicker />
-                </Form.Item>
-                <Form.Item name = "date-picker" id = "end-date">
-                    <DatePicker />
-                </Form.Item>
-                <Form.Item
-                    name="select"
-                    label="Select"
-                    hasFeedback
-                   rules={[
-                     {
-                     required: true,
-                         message: 'Please select a price range',
-                        },
-                        ]} >
-                    <Select placeholder="Please select a price range">
+        
+        <div className="filter">
+           <Card style = {{width: '100%' }}>
+                <Row gutter = {40} justify = "center">
+                    <Col span = {6}>
+                        <DatePicker name="date-picker" id="start-date"/>
+                    </Col>
+                    <Col span = {6}>
+                        <DatePicker name="date-picker" id="end-date" />
+                    </Col>
+                </Row>
+                <Row gutter = {40} justify = "center">
+                    <Select placeholder="Select a price range" 
+                    id = "select" style={{ width: 170 }}>
                         <Option value="below-50">below 50</Option>
                         <Option value="50-100">50-100</Option>
                         <Option value="100-200">100-200</Option>
                         <Option value="200-500">200-500</Option>
                         <Option value="above-500">above 500</Option>
                     </Select>
-                </Form.Item>
-                <Form.Item
-                    name="Category"
-                    label="Category"
-                    hasFeedback
-                   rules={[
-                     {
-                     required: true,
-                         message: 'Please select category',
-                        },
-                        ]} >
-                    <Select placeholder="Please select category">
+               
+          
+                    <Select placeholder="Select category" 
+                    id = "category" style={{ width: 170 }}>
                         <Option value="furnitures">furnitures</Option>
                         <Option value="electronic devices">electronic devices</Option>
                         <Option value="clothing-accesory">clothing&accesory</Option>
                         <Option value="books">books</Option>
                         <Option value="school-lab">school&lab</Option>
                     </Select>
-                </Form.Item>
+                </Row>
+                <Row justify = "end" gutter = {4}>
+                    <Button type="primary" htmlType="submit" id = "apply">
+                        apply
+                    </Button>
+                    <Button type="primary" htmlType="submit" id = "cancel">
+                        cancel
+                    </Button>
+                </Row>
+            </Card>
+      </div>
      
-            </Form>
-        
-
-        </div>
     ); 
    }
 }
