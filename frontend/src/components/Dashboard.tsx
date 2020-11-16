@@ -1,9 +1,9 @@
 import React from "react";
 import { Layout, Breadcrumb } from "antd";
 import "./App.css";
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 import Navbar from "./Navbar";
-import Filter from "./Filter";
+import Siderf from "./Siderf";
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
@@ -58,15 +58,16 @@ export default class Dashboard extends React.Component<Props, State> {
                 </div>
               </div>
             </Header>
-            <Content id="header2">
-              <Filter />
-            </Content>
+
           </>
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>Product</Breadcrumb.Item>
             </Breadcrumb>
+            <Sider className="site-layout-background" width={200}>
+               <Siderf/>
+            </Sider>
             <div className="board">
               <Boardcontent dataArray={this.state.dataArray} />
             </div>
