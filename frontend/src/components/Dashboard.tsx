@@ -3,7 +3,7 @@ import { Layout, Breadcrumb } from "antd";
 import "./App.css";
 const { Header, Content, Footer, Sider } = Layout;
 import Navbar from "./Navbar";
-import Siderf from "./Siderf";
+//import Siderf from "./Siderf";
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
@@ -13,6 +13,7 @@ export interface Props {}
 export interface State {
   searchTerm: string;
   dataArray: any;
+  createParams: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -20,9 +21,11 @@ export default class Dashboard extends React.Component<Props, State> {
     super(props);
     this.state = {
       searchTerm: "",
-      dataArray: []
+      dataArray: [],
+      createParams: {}
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onCreateHandler = this.onCreateHandler.bind(this);
   }
 
   private onSearchHandler(searchInput: any) {
@@ -30,6 +33,13 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: searchInput
     });
     this.search();
+  }
+
+  private onCreateHandler(createParams: any) {
+    this.setState({
+      createParams: createParams
+    });
+    this.create();
   }
 
   private search() {
@@ -45,6 +55,10 @@ export default class Dashboard extends React.Component<Props, State> {
       });
   }
 
+  private create() {
+    console.log(this.state.createParams);
+  }
+
   render() {
     return (
       <div id="mydash">
@@ -54,20 +68,16 @@ export default class Dashboard extends React.Component<Props, State> {
               <Navbar onSearchCallBack={this.onSearchHandler} />
               <div className="sell">
                 <div className="buttonsell">
-                  <Sell />
+                  <Sell onSubmitCallBack={this.onCreateHandler} />
                 </div>
               </div>
             </Header>
-
           </>
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>Product</Breadcrumb.Item>
             </Breadcrumb>
-            <Sider className="site-layout-background" width={200}>
-               <Siderf/>
-            </Sider>
             <div className="board">
               <Boardcontent dataArray={this.state.dataArray} />
             </div>
