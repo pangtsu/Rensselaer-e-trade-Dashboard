@@ -1,18 +1,20 @@
 import React from "react";
 import { Layout, Breadcrumb } from "antd";
 import "./App.css";
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 import Navbar from "./Navbar";
-import Filter from "./Filter";
+//import Siderf from "./Siderf";
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
+import { createItem } from "./../utils/create";
 
 export interface Props {}
 
 export interface State {
   searchTerm: string;
   dataArray: any;
+  itemParams: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -20,9 +22,11 @@ export default class Dashboard extends React.Component<Props, State> {
     super(props);
     this.state = {
       searchTerm: "",
-      dataArray: []
+      dataArray: [],
+      itemParams: {}
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onCreateHandler = this.onCreateHandler.bind(this);
   }
 
   private onSearchHandler(searchInput: any) {
@@ -30,6 +34,13 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: searchInput
     });
     this.search();
+  }
+
+  private onCreateHandler(itemParams: any) {
+    this.setState({
+      itemParams: itemParams
+    });
+    this.create();
   }
 
   private search() {
@@ -45,6 +56,16 @@ export default class Dashboard extends React.Component<Props, State> {
       });
   }
 
+  private create() {
+    createItem(this.state.itemParams)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div id="mydash">
@@ -54,13 +75,10 @@ export default class Dashboard extends React.Component<Props, State> {
               <Navbar onSearchCallBack={this.onSearchHandler} />
               <div className="sell">
                 <div className="buttonsell">
-                  <Sell />
+                  <Sell onSubmitCallBack={this.onCreateHandler} />
                 </div>
               </div>
             </Header>
-            <Content id="header2">
-              <Filter />
-            </Content>
           </>
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
