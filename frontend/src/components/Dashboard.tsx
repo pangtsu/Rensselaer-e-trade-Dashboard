@@ -7,13 +7,14 @@ import Navbar from "./Navbar";
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
+import { createItem } from "./../utils/create";
 
 export interface Props {}
 
 export interface State {
   searchTerm: string;
   dataArray: any;
-  createParams: any;
+  itemParams: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -22,7 +23,7 @@ export default class Dashboard extends React.Component<Props, State> {
     this.state = {
       searchTerm: "",
       dataArray: [],
-      createParams: {}
+      itemParams: {}
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
@@ -35,9 +36,9 @@ export default class Dashboard extends React.Component<Props, State> {
     this.search();
   }
 
-  private onCreateHandler(createParams: any) {
+  private onCreateHandler(itemParams: any) {
     this.setState({
-      createParams: createParams
+      itemParams: itemParams
     });
     this.create();
   }
@@ -56,7 +57,19 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   private create() {
-    console.log(this.state.createParams);
+    const params = {
+      itemName: "lamp",
+      category: "furniture",
+      price: 12
+    };
+    createItem(params)
+      .then(res => {
+        console.log(res.data);
+        console.log(this.state.itemParams);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {

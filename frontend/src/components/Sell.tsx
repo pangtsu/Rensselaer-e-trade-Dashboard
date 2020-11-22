@@ -5,6 +5,13 @@ import { Modal, Button, Form, Input, Select, InputNumber } from "antd";
 
 const { Option } = Select;
 
+/*
+TODO:
+  Figure out how to access the input field values for
+  the form and so we can change the states.
+
+  Alternatively, if that's not working, change it to 
+*/
 export interface Props {
   onSubmitCallBack(params: any): void;
 }
@@ -24,7 +31,7 @@ export default class Sell extends React.Component<Props, State> {
       loading: false,
       category: "",
       name: "",
-      price: 0
+      price: -1
     };
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
@@ -40,22 +47,27 @@ export default class Sell extends React.Component<Props, State> {
   }
 
   private handleOk() {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false, visible: false });
-    }, 3000);
-    console.log(this.state.category);
-    console.log(this.state.name);
+    //this.setState({ loading: true });
+    //setTimeout(() => {
+    //  this.setState({ loading: false });
+    //}, 3000);
+    const params = {
+      itemName: this.state.name,
+      category: this.state.category,
+      price: this.state.price
+    };
+    this.props.onSubmitCallBack(params);
   }
 
   private handleCancel() {
-    this.setState({ visible: false });
+    this.setState({ visible: false, name: "", category: "", price: -1 });
   }
 
   private onCategoryChange(value: any) {
     this.setState({ category: value });
   }
 
+  // event triggers for input changes
   private onValuesChange = (changedValues: any, allValues: any) => {
     console.log(changedValues);
     console.log(allValues);
