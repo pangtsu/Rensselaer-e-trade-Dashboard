@@ -57,15 +57,9 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   private create() {
-    const params = {
-      itemName: "lamp",
-      category: "furniture",
-      price: 12
-    };
-    createItem(params)
+    createItem(this.state.itemParams)
       .then(res => {
         console.log(res.data);
-        console.log(this.state.itemParams);
       })
       .catch(error => {
         console.log(error);
