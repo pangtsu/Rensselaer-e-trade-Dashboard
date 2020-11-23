@@ -4,15 +4,18 @@ import "./App.css";
 const { Header, Content, Footer } = Layout;
 import Navbar from "./Navbar";
 import Selectionb from "./Selectionb"
+
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
+import { createItem } from "./../utils/create";
 
 export interface Props {}
 
 export interface State {
   searchTerm: string;
   dataArray: any;
+  itemParams: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -20,9 +23,11 @@ export default class Dashboard extends React.Component<Props, State> {
     super(props);
     this.state = {
       searchTerm: "",
-      dataArray: []
+      dataArray: [],
+      itemParams: {}
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onCreateHandler = this.onCreateHandler.bind(this);
   }
 
   private onSearchHandler(searchInput: any) {
@@ -32,6 +37,13 @@ export default class Dashboard extends React.Component<Props, State> {
     this.search();
   }
 
+  private onCreateHandler(itemParams: any) {
+    this.setState({
+      itemParams: itemParams
+    });
+    this.create();
+  }
+
   private search() {
     searchItem(this.state.searchTerm)
       .then(res => {
@@ -39,6 +51,16 @@ export default class Dashboard extends React.Component<Props, State> {
           dataArray: res.data
         });
         console.log(this.state.dataArray);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  private create() {
+    createItem(this.state.itemParams)
+      .then(res => {
+        console.log(res.data);
       })
       .catch(error => {
         console.log(error);
@@ -55,18 +77,17 @@ export default class Dashboard extends React.Component<Props, State> {
               <div className="sell">
                 <Selectionb />
                 <div className="buttonsell">
-                  <Sell />
+                  <Sell onSubmitCallBack={this.onCreateHandler} />
                 </div>
               </div>
             </Header>
-
           </>
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>Product</Breadcrumb.Item>
             </Breadcrumb>
-          
+
             <div className="board">
               <Boardcontent dataArray={this.state.dataArray} />
             </div>

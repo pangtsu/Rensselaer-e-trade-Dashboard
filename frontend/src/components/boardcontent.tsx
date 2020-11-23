@@ -1,6 +1,10 @@
 import React from "react";
 import "./App.css";
+<<<<<<< HEAD
 import {List, Avatar} from "antd"
+=======
+import { List, Avatar } from "antd";
+>>>>>>> 70d4df977c59af249634615aede6ad164ffc4a74
 
 export interface Props {
   dataArray: any;
@@ -15,7 +19,10 @@ export default class boardcontent extends React.Component<Props, State> {
 
   render() {
     return (
+<<<<<<< HEAD
     <div >
+=======
+>>>>>>> 70d4df977c59af249634615aede6ad164ffc4a74
       <List
         itemLayout="vertical"
         size="large"
@@ -63,7 +70,10 @@ export default class boardcontent extends React.Component<Props, State> {
           </List.Item>
         )}
       />
+<<<<<<< HEAD
     </div>
+=======
+>>>>>>> 70d4df977c59af249634615aede6ad164ffc4a74
     );
   }
 }
