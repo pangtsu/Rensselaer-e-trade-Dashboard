@@ -100,19 +100,13 @@ export default class Sell extends React.Component<Props, State> {
             </Button>
           ]}
         >
-          <Form>
-            <Form.Item
-              name="name"
-              label="Product Name"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="category"
-              label="Product Type"
-              rules={[{ required: true }]}
-            >
+          <form>
+           
+            <label>Product Name   
+              <input type = "text" name = "name" />
+            </label> 
+
+            <label>Select a category
               <Select
                 placeholder="Please select category"
                 onChange={this.onCategoryChange}
@@ -123,29 +117,17 @@ export default class Sell extends React.Component<Props, State> {
                 <Option value="books">books</Option>
                 <Option value="school-lab">school&lab</Option>
               </Select>
-            </Form.Item>
-            <Form.Item
-              name="price"
-              label="Price"
-              rules={[
-                {
-                  required: true,
-                  type: "number",
-                  min: 0,
-                  max: 20000
-                }
-              ]}
-            >
+            </label>  
+
+            <label>Price
               <InputNumber />
-            </Form.Item>
-            <Form.Item
-              name="description"
-              label="Description"
-              rules={[{ required: false }]}
-            >
+            </label> 
+
+            <label>Description
               <Input.TextArea />
-            </Form.Item>
-          </Form>
+            </label>
+
+          </form>
         </Modal>
       </>
     );
