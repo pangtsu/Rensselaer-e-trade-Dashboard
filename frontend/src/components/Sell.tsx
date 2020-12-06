@@ -54,7 +54,8 @@ export default class Sell extends React.Component<Props, State> {
     const params = {
       itemName: this.state.name,
       category: this.state.category,
-      price: this.state.price
+      price: this.state.price,
+      descriptions: this.state.description
     };
     console.log(params)
     this.props.onSubmitCallBack(params);
