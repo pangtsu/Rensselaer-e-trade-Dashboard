@@ -1,8 +1,6 @@
 import React from "react";
 import "./App.css";
-
-import {List, Avatar} from "antd"
-
+import { List, Avatar } from "antd";
 
 export interface Props {
   dataArray: any;
@@ -17,8 +15,6 @@ export default class boardcontent extends React.Component<Props, State> {
 
   render() {
     return (
-
-    <div >
       <List
         itemLayout="vertical"
         size="large"
@@ -66,8 +62,7 @@ export default class boardcontent extends React.Component<Props, State> {
           </List.Item>
         )}
       />
-
-    </div>
     );
   }
 }
+
