@@ -2,7 +2,7 @@
   
 import React from "react";
 import {  Menu} from "antd";
-import { KeyOutlined, DashboardOutlined, SkinOutlined } from '@ant-design/icons';
+import { KeyOutlined, DashboardOutlined, SkinOutlined, AlertOutlined, AppstoreOutlined } from '@ant-design/icons';
 import "./App.css";
 
 const { SubMenu } = Menu;
@@ -21,14 +21,16 @@ export default class Filter extends React.Component{
 
     return (
         
-        <div className="filter">
-            <Menu mode="horizontal">
+        <div id="filter">
+           <div id = "filter2">
+            <Menu mode="horizontal" id = "selec_inside">
+          
                 <SubMenu key="sub1" icon={<KeyOutlined />} title="price">
                     <Menu.Item key="1">below 50</Menu.Item>
-                     <Menu.Item key="2">50-100</Menu.Item>
-              <Menu.Item key="3">100-200</Menu.Item>
-              <Menu.Item key="4">above 200</Menu.Item>
-            </SubMenu>
+                    <Menu.Item key="2">50-100</Menu.Item>
+                    <Menu.Item key="3">100-200</Menu.Item>
+                    <Menu.Item key="4">above 200</Menu.Item>
+                </SubMenu>
             <SubMenu key="sub2" icon={<SkinOutlined />} title="category" >
               <Menu.Item key="5">book</Menu.Item>
               <Menu.Item key="6">furnitures</Menu.Item>
@@ -42,8 +44,17 @@ export default class Filter extends React.Component{
               <Menu.Item key="12">this semester</Menu.Item>
               <Menu.Item key="13">past </Menu.Item>
             </SubMenu>
+            <SubMenu key="sub4" icon={<AlertOutlined />} title="history">
+              <Menu.Item key="14">today</Menu.Item>
+              <Menu.Item key="15">this week</Menu.Item>
+              <Menu.Item key="16">this monsth</Menu.Item>
+              <Menu.Item key="17">this semester</Menu.Item>
+              <Menu.Item key="18">past </Menu.Item>
+            </SubMenu>
+
+
             </Menu>
-                 
+            </div> 
       </div>
      
     ); 

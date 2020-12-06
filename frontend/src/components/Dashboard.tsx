@@ -75,6 +75,7 @@ export default class Dashboard extends React.Component<Props, State> {
             <Header id="header" style={{ background: "#fff" }}>
               <Navbar onSearchCallBack={this.onSearchHandler} />
               <Selectionb />
+                
               <div className="sell">
                 <div className="buttonsell">
                   <Sell onSubmitCallBack={this.onCreateHandler} />
