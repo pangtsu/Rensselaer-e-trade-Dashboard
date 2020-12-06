@@ -72,22 +72,25 @@ export default class Dashboard extends React.Component<Props, State> {
       <div id="mydash">
         <Layout>
           <>
-            <Header id="header" style={{ background: "#f0f2f5" }}>
+            <Header id="header" style={{ background: "#fff" }}>
               <Navbar onSearchCallBack={this.onSearchHandler} />
+              <Selectionb />
               <div className="sell">
-                <Selectionb />
                 <div className="buttonsell">
                   <Sell onSubmitCallBack={this.onCreateHandler} />
                 </div>
               </div>
             </Header>
           </>
+          
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>Product</Breadcrumb.Item>
             </Breadcrumb>
 
+             
+           
             <div className="board">
               <Boardcontent dataArray={this.state.dataArray} />
             </div>
