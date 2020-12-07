@@ -1,9 +1,10 @@
 import React from "react";
 import { Layout, Breadcrumb } from "antd";
 import "./App.css";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 import Navbar from "./Navbar";
-//import Siderf from "./Siderf";
+import Selectionb from "./Selectionb"
+
 import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
@@ -71,8 +72,10 @@ export default class Dashboard extends React.Component<Props, State> {
       <div id="mydash">
         <Layout>
           <>
-            <Header id="header" style={{ background: "#f0f2f5" }}>
+            <Header id="header" style={{ background: "#fff" }}>
               <Navbar onSearchCallBack={this.onSearchHandler} />
+              <Selectionb />
+                
               <div className="sell">
                 <div className="buttonsell">
                   <Sell onSubmitCallBack={this.onCreateHandler} />
@@ -80,11 +83,15 @@ export default class Dashboard extends React.Component<Props, State> {
               </div>
             </Header>
           </>
+          
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>Product</Breadcrumb.Item>
             </Breadcrumb>
+
+             
+           
             <div className="board">
               <Boardcontent dataArray={this.state.dataArray} />
             </div>

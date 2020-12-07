@@ -53,15 +53,16 @@ export default class boardcontent extends React.Component<Props, State> {
               }
               title={
                 <a href={"https://ant.design"}>
-                  {item ? item.itemname : "none"}
+                  {item ? item.itemname + " ( $" +  item.price + " )": "none"}
                 </a>
               }
-              description={item ? item.price : 0}
+              description={item ? item.category : "none"}
             />
-            {item ? item.utility : "none"}
+            {item ? item.descriptions : "none"}
           </List.Item>
         )}
       />
     );
   }
 }
+

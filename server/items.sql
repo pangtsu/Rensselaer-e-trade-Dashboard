@@ -6,14 +6,15 @@ CREATE DATABASE item;
 CREATE TABLE items (
   itemName VARCHAR,
   price INTEGER,
-  category VARCHAR
+  category VARCHAR,
+  descriptions VARCHAR
 );
 
-INSERT INTO items (itemName,  price, category)
-  VALUES ('AC',  120, 'utility');
+INSERT INTO items (itemName,  price, category, descriptions)
+  VALUES ('AC',  120, 'utility', 'Portable AC for sale');
 
-INSERT INTO items (itemName,  price, category)
-  VALUES ('desk',  60, 'furniture');
+INSERT INTO items (itemName,  price, category, descriptions)
+  VALUES ('desk',  60, 'furniture', 'Laminated woods');
 
-INSERT INTO items (itemName,  price, category)
-  VALUES ('textbook',  10, 'academic');
+INSERT INTO items (itemName,  price, category, descriptions)
+  VALUES ('textbook',  10, 'academic', 'Positive Psychology');
