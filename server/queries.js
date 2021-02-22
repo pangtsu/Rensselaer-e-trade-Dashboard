@@ -1,13 +1,13 @@
 var promise = require('bluebird');
+const config = require("./config.json");
 
 var options = {
     promiseLib: promise
 };
-
 var pgp = require('pg-promise')(options);
 
 // postgres connection string
-var connectionString = 'postgres://localhost:5432/item';
+var connectionString = config.server.pgConnection;
 var db = pgp(connectionString);
 
 
