@@ -1,5 +1,5 @@
 var promise = require('bluebird');
-const config = require("./config.json");
+const config = require("../config.json");
 
 var options = {
     promiseLib: promise
