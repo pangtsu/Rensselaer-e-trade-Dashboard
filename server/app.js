@@ -1,12 +1,9 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors')
-
-var routes = require('./routes/index');
 
 var app = express();
 
@@ -25,12 +22,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.use('/', routes);
+// sequelize
+const db = require('./config/db.config.js');
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync with { force: true }');
+}); 
 
-app.get('/swagger.json', function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
+let router = require('./routes/index.js');
+app.use('/', router);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -41,9 +41,6 @@ app.use(function (req, res, next) {
 
 
 // error handlers
-
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function (err, req, res, next) {
     res.status(err.code || 500)
@@ -63,6 +60,14 @@ app.use(function (err, req, res, next) {
       message: err.message
     });
 });
+
+const server = app.listen(8080, function () {
+ 
+  let host = server.address().address
+  let port = server.address().port
+ 
+  console.log("App listening at http://%s:%s", host, port); 
+})
 
 
 module.exports = app;
