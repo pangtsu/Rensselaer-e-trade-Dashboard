@@ -4,7 +4,7 @@
 
 Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!
 
-*A single web-appilcation using React for the frontend, Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
+*A single-page webapp using React for the frontend, Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
 
 ## Requirement
 
