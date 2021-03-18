@@ -4,6 +4,8 @@
 
 Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!
 
+*A single web-appilcation using React for the frontend, Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perfrom basic CRUD operation.*
+
 ## Requirement
 
 - node
@@ -11,7 +13,7 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
 ## Installation
 
-- Install dependencies using `npm install`
+- Install dependencies using `npm install` in the project root, frontend, and server directories.
 
 - cd into the server directory, and run
 
@@ -29,7 +31,15 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
   in the project root directory and visit `localhost:8080` to view the live application.
 
-- Once the application is up and running, you may use the `localhost:8000/api/item` endpoint to access the backend API.
+## Backend API Endpoints
+
+- **Get Items** : /api/item/:key
+- **Create Item**: /api/item
+- **Update/Delete Item**: /api/item/:id
+- **Upload Single File**: /api/file/upload
+- **List All Files**: /api/file/info
+- **Download File**: /api/file/:id
+
 
   i.e., `http://localhost:8000/api/item/AC` shall return
 
