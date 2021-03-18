@@ -1,3 +1,5 @@
+// setting up postgresql connection with sequelize
+
 const env = require('./env.js');
  
 const Sequelize = require('sequelize');
