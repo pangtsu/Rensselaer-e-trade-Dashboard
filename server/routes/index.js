@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 let upload = require('../config/multer.config.js');
 const fileWorker = require('../controllers/file.controller.js');
-const itemWorker = require('../controllers/queries');
+const itemWorker = require('../controllers/queries.js');
 
 
 /* items */

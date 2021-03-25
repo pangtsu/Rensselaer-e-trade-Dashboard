@@ -4,30 +4,18 @@ import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 export interface Props {
+  onUploadCallBack(imageIDs: any): void;
 }
 
 export interface State {
   fileList: any;
-  fileIds: any;
 }
 
-/*
-const props = {
-  action: 'http://localhost:8080/api/file/upload',
-  onChange({ file, fileList }) {
-    if (file.status !== 'uploading') {
-      console.log(file, fileList);
-    }
-  },
-  defaultFileList: [],
-};
-*/
 export default class UploadFile extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      fileList: [],
-      fileIds: []
+      fileList: []
     };
   }
 
@@ -52,10 +40,7 @@ export default class UploadFile extends React.Component<Props, State> {
     }
 
     this.setState({ fileList });
-
-    console.log(this.state.fileList);
-    console.log(fileId);
-
+    this.props.onUploadCallBack(fileId);
   };
   
 

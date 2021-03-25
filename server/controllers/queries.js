@@ -31,7 +31,7 @@ function getItem(req, res, next) {
 function createItem(req, res, next) {
     req.body.price = parseInt(req.body.price);
     db.none('insert into items(itemName, price, category, descriptions)' +
-            'values(${itemName}, ${price}, ${category}, ${descriptions})',
+            'values(${itemName}, ${price}, ${category}, ${descriptions}',
             req.body)
         .then(function () {
             res.status(200)

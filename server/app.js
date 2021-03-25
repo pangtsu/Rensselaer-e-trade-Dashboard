@@ -4,7 +4,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors')
-
+var debug = require('debug')('server:server');
+var http = require('http');
+var router = require('./routes/index.js');
 var app = express();
 
 // view engine setup
@@ -28,7 +30,6 @@ db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync with { force: true }');
 }); 
 
-let router = require('./routes/index.js');
 app.use('/', router);
 
 
@@ -38,7 +39,6 @@ app.use(function (req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 if (app.get('env') === 'development') {
@@ -61,6 +61,16 @@ app.use(function (err, req, res, next) {
     });
 });
 
+/*
+var port = normalizePort(process.env.PORT || '8080');
+app.set('port', port);
+var server = http.createServer(app);
+
+server.listen(port);
+//server.on('error', onError);
+server.on('listening', onListening);
+*/
+
 const server = app.listen(8080, function () {
  
   let host = server.address().address
@@ -69,5 +79,33 @@ const server = app.listen(8080, function () {
   console.log("App listening at http://%s:%s", host, port); 
 })
 
+/*
+function normalizePort(val) {
+  var port = parseInt(val, 10);
 
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+*/
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+/*
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+*/
 module.exports = app;

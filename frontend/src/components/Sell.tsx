@@ -24,6 +24,7 @@ export interface State {
   name: string;
   price: number;
   description: string;
+  imageIDs: any
 }
 export default class Sell extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -34,7 +35,8 @@ export default class Sell extends React.Component<Props, State> {
       category: "",
       name: "",
       price: -1,
-      description: ""
+      description: "",
+      imageIDs: []
     };
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
@@ -43,7 +45,13 @@ export default class Sell extends React.Component<Props, State> {
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onPriceChange = this.onPriceChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
+    this.UploadImageHandler = this.UploadImageHandler.bind(this);
   }
+
+private UploadImageHandler(imageIDs: any) {
+  console.log(imageIDs);
+  this.setState({imageIDs: imageIDs});
+}
 
   private showModal() {
     this.setState({
@@ -57,13 +65,13 @@ export default class Sell extends React.Component<Props, State> {
       category: this.state.category,
       price: this.state.price,
       descriptions: this.state.description
+     // imageIDs: this.state.imageIDs
     };
-    console.log(params)
     this.props.onSubmitCallBack(params);
   }
 
   private handleCancel() {
-    this.setState({ visible: false, name: "", category: "", price: -1, description: "" });
+    this.setState({ visible: false, name: "", category: "", price: -1, description: "", imageIDs: []});
   }
 
   // event triggers for input changes
@@ -162,7 +170,7 @@ export default class Sell extends React.Component<Props, State> {
               label="Upload Picture"
               rules={[{ required: false }]}
             >
-              <UploadFile />
+              <UploadFile onUploadCallBack={this.UploadImageHandler}/>
             </Form.Item>
           </Form>
         </Modal>
