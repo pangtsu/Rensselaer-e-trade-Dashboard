@@ -1,6 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./App.css";
+import UploadFile from './UploadFile';
 import { Modal, Button, Form, Input, Select, InputNumber } from "antd";
 
 const { Option } = Select;
@@ -155,6 +156,13 @@ export default class Sell extends React.Component<Props, State> {
               rules={[{ required: false }]}
             >
               <Input.TextArea rows={4} onChange = {this.onDescriptionChange} />
+            </Form.Item>
+            <Form.Item
+              name="pic"
+              label="Upload Picture"
+              rules={[{ required: false }]}
+            >
+              <UploadFile />
             </Form.Item>
           </Form>
         </Modal>
