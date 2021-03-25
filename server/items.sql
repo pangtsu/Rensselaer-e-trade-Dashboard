@@ -7,7 +7,9 @@ CREATE TABLE items (
   itemName VARCHAR,
   price INTEGER,
   category VARCHAR,
-  descriptions VARCHAR);
+  descriptions VARCHAR,
+  imageIDs INTEGER[]
+  );
 
 INSERT INTO items (itemName,  price, category, descriptions)
   VALUES ('AC',  120, 'utility', 'Portable AC for sale');

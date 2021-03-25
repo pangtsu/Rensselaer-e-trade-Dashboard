@@ -61,15 +61,6 @@ app.use(function (err, req, res, next) {
     });
 });
 
-/*
-var port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
-var server = http.createServer(app);
-
-server.listen(port);
-//server.on('error', onError);
-server.on('listening', onListening);
-*/
 
 const server = app.listen(8080, function () {
  
@@ -79,33 +70,4 @@ const server = app.listen(8080, function () {
   console.log("App listening at http://%s:%s", host, port); 
 })
 
-/*
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-*/
-/**
- * Event listener for HTTP server "listening" event.
- */
-/*
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string' ?
-    'pipe ' + addr :
-    'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
-*/
 module.exports = app;
