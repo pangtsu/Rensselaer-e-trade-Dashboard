@@ -29,7 +29,7 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
   npm start
   ```
 
-  in the project root directory and visit `localhost:8080` to view the live application.
+  in the project root directory and visit `localhost:8081` to view the live application.
 
 ## Backend API Endpoints
 
@@ -41,7 +41,7 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 - **Download File**: /api/file/:id
 
 
-  i.e., `http://localhost:8000/api/item/AC` shall return
+  i.e., `http://localhost:8080/api/item/AC` shall return
 
   ```
   {"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}
