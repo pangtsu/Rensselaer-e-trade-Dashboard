@@ -7,7 +7,7 @@ CREATE TABLE items (
   itemName VARCHAR,
   price INTEGER,
   category VARCHAR,
-  descriptions VARCHAR
+  descriptions VARCHAR 
 );
 
 INSERT INTO items (itemName,  price, category, descriptions)

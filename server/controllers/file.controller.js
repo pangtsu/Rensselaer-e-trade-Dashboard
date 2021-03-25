@@ -3,13 +3,15 @@ var stream = require('stream');
 const db = require('../config/db.config.js');
 const File = db.files;
 
+// returns the id of the photo after uploaded
 exports.uploadFile = (req, res) => {
 	File.create({
 		type: req.file.mimetype,
 		name: req.file.originalname,
 		data: req.file.buffer
-	}).then(() => {
-		res.json({msg:'File uploaded successfully! -> filename = ' + req.file.originalname});
+	}).then((value) => {
+		res.json({msg: value.dataValues.id});
+		console.log(value);
 	}).catch(err => {
 		console.log(err);
 		res.json({msg: 'Error', detail: err});
