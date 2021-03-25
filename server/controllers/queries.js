@@ -30,9 +30,14 @@ function getItem(req, res, next) {
 
 function createItem(req, res, next) {
     req.body.price = parseInt(req.body.price);
-    db.none('insert into items(itemName, price, category, descriptions)' +
-            'values(${itemName}, ${price}, ${category}, ${descriptions}',
-            req.body)
+    console.log(req.body.imageIDs);
+    db.none('insert into items(itemName, price, category, descriptions, imageIDs)' +
+            'values(${name}, ${price}, ${category}, ${descript}, ${image} )',
+            {
+                name: req.body.itemName, price: parseInt(req.body.price),
+                category: req.body.category, descript: req.params.descriptions,
+                image: req.body.imageIDs
+            })
         .then(function () {
             res.status(200)
                 .json({
