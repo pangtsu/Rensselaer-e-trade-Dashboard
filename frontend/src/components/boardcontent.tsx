@@ -37,18 +37,18 @@ export default class boardcontent extends React.Component<Props, State> {
             key={item ? item.itemname : "none"}
             extra={
               <img
-                width={272}
+                width={400}
                 alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                
+                //{`data:image/png;base64,${this.state.image}`}
+                src={item? `data:image/png;base64,${item.image}` : "https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"}
               />
             }
           >
             <List.Item.Meta
               avatar={
                 <Avatar
-                  src={
-                    "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  }
+                  src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
                 />
               }
               title={

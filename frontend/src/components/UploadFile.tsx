@@ -24,7 +24,7 @@ export default class UploadFile extends React.Component<Props, State> {
 
     // 1. Limit the number of uploaded files
     // Only to show two recent uploaded files, and old ones will be replaced by the new
-    fileList = fileList.slice(-2);
+    fileList = fileList.slice(-1);
 
     fileList = fileList.map(file => {
       if (file.response) {

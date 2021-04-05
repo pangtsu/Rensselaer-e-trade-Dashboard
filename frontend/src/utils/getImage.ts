@@ -1,0 +1,12 @@
+const axios = require("axios");
+
+export async function getImage(imageID: string) {
+  console.log(imageID);
+  const url = "http://localhost:8080/api/file/" + imageID;
+  let res = await axios.get(url, {
+    headers: { "Access-Control-Allow-Origin": "*" }
+  });
+  let data = res.data;
+  console.log(data);
+  return data;
+}

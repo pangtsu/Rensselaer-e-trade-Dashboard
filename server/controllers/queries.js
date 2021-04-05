@@ -35,7 +35,7 @@ function createItem(req, res, next) {
             'values(${name}, ${price}, ${category}, ${descript}, ${image} )',
             {
                 name: req.body.itemName, price: parseInt(req.body.price),
-                category: req.body.category, descript: req.params.descriptions,
+                category: req.body.category, descript: req.body.descriptions,
                 image: req.body.imageIDs
             })
         .then(function () {

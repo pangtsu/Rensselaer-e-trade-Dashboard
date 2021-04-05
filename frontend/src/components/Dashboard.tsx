@@ -9,6 +9,8 @@ import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
 import { createItem } from "./../utils/create";
+import { getImage } from "./../utils/getImage";
+import { object } from "prop-types";
 
 export interface Props {}
 
@@ -44,9 +46,28 @@ export default class Dashboard extends React.Component<Props, State> {
     this.create();
   }
 
+
+  private fetchImage(itemArray: any) {
+    itemArray.forEach(element => {
+      console.log("print this json object...");
+      console.log(element);
+      if (element.imageids.length > 0){
+        getImage(element.imageids[0].toString())
+          .then(res => {
+            element.image = res.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });      
+        }
+    });
+  }
+
+  
   private search() {
     searchItem(this.state.searchTerm)
       .then(res => {
+        this.fetchImage(res.data);
         this.setState({
           dataArray: res.data
         });
