@@ -2,9 +2,11 @@
 
 ## Overview
 
-Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!
+Tired of posting on Facebook, Craigslist, Reddit, Poshmark and all different websites -- just to sell/buy something? This is a web application made for students at RPI to sell/buy second-handed products effortlessly!
 
-*A single-page webapp using React for the frontend, Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
+**Stack**: *A single-page webapp using React for the frontend (Webpack + Babel Build), Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
+
+![Drag Racing](UI-pics/dashboard.png)
 
 ## Requirement
 
@@ -38,13 +40,13 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 - **Update/Delete Item**: /api/item/:id
 - **Upload Single File**: /api/file/upload
 - **List All Files**: /api/file/info
-- **Download File**: /api/file/:id
-
+- **Fetch File in Base64**: /api/file/:id
+- **Download File**: /api/file/download/:id
 
   i.e., `http://localhost:8080/api/item/AC` shall return
 
   ```
-  {"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}
+  {"status":"success","data":[{"itemname":"AC","price":200,"category":"Home Appliances","descriptions":"used portable AC, originally at $400","imageids":[1]}],"message":"Retrieved item"}
   ```
 
 ## Troubleshooting
