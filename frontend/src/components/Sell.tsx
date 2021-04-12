@@ -6,13 +6,7 @@ import { Modal, Button, Form, Input, Select, InputNumber } from "antd";
 
 const { Option } = Select;
 
-/*
-TODO:
-  Figure out how to access the input field values for
-  the form and so we can change the states.
 
-  Alternatively, if that's not working, change it to 
-*/
 export interface Props {
   onSubmitCallBack(params: any): void;
 }
@@ -99,12 +93,12 @@ private UploadImageHandler(imageIDs: any) {
 
     return (
       <>
-        <Button id="butt" onClick={this.showModal} style={{ color: "white" }}>
+        <Button id="butt" type='primary' danger onClick={this.showModal} size="large">
           Sell
         </Button>
         <Modal
           visible={visible}
-          title="Create your new product"
+          title="Submit A New Product"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
@@ -135,13 +129,17 @@ private UploadImageHandler(imageIDs: any) {
               rules={[{ required: true }]}
             >
               <Select
-                placeholder="Please select category"
+                placeholder="Please Select a Category"
                 onChange={this.onCategoryChange}
               >
-                <Option value="furnitures">Furnitures</Option>
-                <Option value="electronic devices">Electronic Devices</Option>
-                <Option value="clothing-accesory">Clothing & Accesory</Option>
-                <Option value="school-lab">School & Lab</Option>
+                <Option value="Furnitures">Furnitures</Option>
+                <Option value="Electronic Devices">Electronic Devices</Option>
+                <Option value="Clothing">Clothings & Accesories</Option>
+                <Option value="School Supplies">School Supplies</Option>
+                <Option value="Home Appliances">Home Appliances</Option>
+                <Option value="Entertainments">Entertainments</Option>
+                <Option value="Others">Others</Option>
+
               </Select>
             </Form.Item>
             <Form.Item
@@ -168,7 +166,7 @@ private UploadImageHandler(imageIDs: any) {
             <Form.Item
               name="pic"
               label="Upload Picture"
-              rules={[{ required: false }]}
+              rules={[{ required: true }]}
             >
               <UploadFile onUploadCallBack={this.UploadImageHandler}/>
             </Form.Item>

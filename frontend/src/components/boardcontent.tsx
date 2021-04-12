@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { List, Avatar } from "antd";
-
+import { List, Avatar, Card, Tag } from "antd";
+const {Meta} = Card;
 export interface Props {
   dataArray: any;
 }
@@ -16,50 +16,43 @@ export default class boardcontent extends React.Component<Props, State> {
   render() {
     return (
       <List
-        itemLayout="vertical"
-        size="large"
+        grid={{ gutter: 5, column: 3 }}
         pagination={{
           onChange: page => {
             console.log(page);
           },
-          pageSize: 3
+          pageSize: 6
         }}
         dataSource={this.props.dataArray}
         footer={
           <div>
-            <b>search results found:</b> {this.props.dataArray.length}
+            <b>Search Results Found:</b> {this.props.dataArray.length}
           </div>
         }
         renderItem={item => (
-          <List.Item
-            // There will be compiler warning or error with "unknown object"
-            // due to typescript object syntax but just ignore it for now
-            key={item ? item.itemname : "none"}
-            extra={
-              <img
-                width={400}
-                alt="logo"
-                
-                //{`data:image/png;base64,${this.state.image}`}
-                src={item? `data:image/png;base64,${item.image}` : "https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"}
-              />
-            }
-          >
-            <List.Item.Meta
-              avatar={
-                <Avatar
-                  src={"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"}
-                />
-              }
-              title={
-                <a href={"https://ant.design"}>
-                  {item ? item.itemname + " ( $" +  item.price + " )": "none"}
-                </a>
-              }
-              description={item ? item.category : "none"}
-            />
-            {item ? item.descriptions : "none"}
-          </List.Item>
+          <List.Item>
+          <Card 
+               hoverable
+               style={{ width: 400 }}
+               cover={
+                 <img
+                   alt="example"
+                   src={item ? `data:image/png;base64,${item.image}` : "https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"}
+                 />
+               }
+               actions={[
+                <Tag color="red">{item ? item.category : "none"}</Tag>,
+                <Tag color="gold">{item ? "$"+item.price : "none"}</Tag>
+              ]}
+             >
+               <Meta
+                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                 title= {item ? item.itemname: "none"}
+                 description= {item ? item.descriptions : "none"}
+               />
+            
+            </Card>
+        </List.Item>
         )}
       />
     );
