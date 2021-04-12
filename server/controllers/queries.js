@@ -1,15 +1,29 @@
 var promise = require('bluebird');
+const config = require("../config.json");
 
 var options = {
     promiseLib: promise
 };
-
 var pgp = require('pg-promise')(options);
 
 // postgres connection string
-var connectionString = 'postgres://localhost:5432/item';
+var connectionString = config.server.pgConnection;
 var db = pgp(connectionString);
 
+function getAllItems(req, res, next) {
+    db.many("select * from items")
+        .then(function (data) {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: data,
+                    message: 'Retrieved alll items'
+                });
+        })
+        .catch(function (err) {
+            return next(err);
+        });
+}
 
 function getItem(req, res, next) {
     var itemKey = req.params.key;
@@ -30,9 +44,14 @@ function getItem(req, res, next) {
 
 function createItem(req, res, next) {
     req.body.price = parseInt(req.body.price);
-    db.none('insert into items(itemName, price, category, descriptions)' +
-            'values(${itemName}, ${price}, ${category}, ${descriptions})',
-            req.body)
+    console.log(req.body.imageIDs);
+    db.none('insert into items(itemName, price, category, descriptions, imageIDs)' +
+            'values(${name}, ${price}, ${category}, ${descript}, ${image} )',
+            {
+                name: req.body.itemName, price: parseInt(req.body.price),
+                category: req.body.category, descript: req.body.descriptions,
+                image: req.body.imageIDs
+            })
         .then(function () {
             res.status(200)
                 .json({
@@ -80,6 +99,7 @@ function removeItem(req, res, next) {
 
 
 module.exports = {
+    getAllItems:getAllItems,
     getItem: getItem,
     createItem: createItem,
     updateItem: updateItem,

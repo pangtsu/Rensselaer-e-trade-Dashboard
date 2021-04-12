@@ -1,17 +1,12 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./App.css";
+import UploadFile from './UploadFile';
 import { Modal, Button, Form, Input, Select, InputNumber } from "antd";
 
 const { Option } = Select;
 
-/*
-TODO:
-  Figure out how to access the input field values for
-  the form and so we can change the states.
 
-  Alternatively, if that's not working, change it to 
-*/
 export interface Props {
   onSubmitCallBack(params: any): void;
 }
@@ -23,6 +18,7 @@ export interface State {
   name: string;
   price: number;
   description: string;
+  imageIDs: any
 }
 export default class Sell extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -33,7 +29,8 @@ export default class Sell extends React.Component<Props, State> {
       category: "",
       name: "",
       price: -1,
-      description: ""
+      description: "",
+      imageIDs: []
     };
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
@@ -42,7 +39,13 @@ export default class Sell extends React.Component<Props, State> {
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onPriceChange = this.onPriceChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
+    this.UploadImageHandler = this.UploadImageHandler.bind(this);
   }
+
+private UploadImageHandler(imageIDs: any) {
+  this.setState({imageIDs: imageIDs});
+  console.log("image upload handler: "+this.state.imageIDs);
+}
 
   private showModal() {
     this.setState({
@@ -55,14 +58,14 @@ export default class Sell extends React.Component<Props, State> {
       itemName: this.state.name,
       category: this.state.category,
       price: this.state.price,
-      descriptions: this.state.description
+      descriptions: this.state.description,
+      imageIDs: this.state.imageIDs
     };
-    console.log(params)
     this.props.onSubmitCallBack(params);
   }
 
   private handleCancel() {
-    this.setState({ visible: false, name: "", category: "", price: -1, description: "" });
+    this.setState({ visible: false, name: "", category: "", price: -1, description: "", imageIDs: []});
   }
 
   // event triggers for input changes
@@ -90,12 +93,12 @@ export default class Sell extends React.Component<Props, State> {
 
     return (
       <>
-        <Button id="butt" onClick={this.showModal} style={{ color: "white" }}>
+        <Button id="butt" type='primary' danger onClick={this.showModal} size="large">
           Sell
         </Button>
         <Modal
           visible={visible}
-          title="Create your new product"
+          title="Submit A New Product"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
@@ -126,13 +129,17 @@ export default class Sell extends React.Component<Props, State> {
               rules={[{ required: true }]}
             >
               <Select
-                placeholder="Please select category"
+                placeholder="Please Select a Category"
                 onChange={this.onCategoryChange}
               >
-                <Option value="furnitures">Furnitures</Option>
-                <Option value="electronic devices">Electronic Devices</Option>
-                <Option value="clothing-accesory">Clothing & Accesory</Option>
-                <Option value="school-lab">School & Lab</Option>
+                <Option value="Furnitures">Furnitures</Option>
+                <Option value="Electronic Devices">Electronic Devices</Option>
+                <Option value="Clothing">Clothings & Accesories</Option>
+                <Option value="School Supplies">School Supplies</Option>
+                <Option value="Home Appliances">Home Appliances</Option>
+                <Option value="Entertainments">Entertainments</Option>
+                <Option value="Others">Others</Option>
+
               </Select>
             </Form.Item>
             <Form.Item
@@ -155,6 +162,13 @@ export default class Sell extends React.Component<Props, State> {
               rules={[{ required: false }]}
             >
               <Input.TextArea rows={4} onChange = {this.onDescriptionChange} />
+            </Form.Item>
+            <Form.Item
+              name="pic"
+              label="Upload Picture"
+              rules={[{ required: true }]}
+            >
+              <UploadFile onUploadCallBack={this.UploadImageHandler}/>
             </Form.Item>
           </Form>
         </Modal>

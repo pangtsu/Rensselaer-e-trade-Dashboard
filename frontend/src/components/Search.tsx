@@ -28,10 +28,9 @@ export default class Search extends React.Component<Props, State> {
     return (
      
         <Input.Search
-          style = {{marginBottom: 16}}
-          placeholder="Search Your Item"
+          style={{ width: 300 }}
+          placeholder="What ya looking for today?"
           allowClear
-          enterButton="Search"
           size="middle"
           onSearch={this.onSearch}
         />

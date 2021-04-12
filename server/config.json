@@ -1,0 +1,5 @@
+{
+    "server": {
+      "pgConnection": "postgres://localhost:5432/item"
+    }
+  }

@@ -2,7 +2,7 @@ const axios = require("axios");
 
 export async function createItem(params: any) {
   const paramstring = JSON.stringify(params);
-  const url = "http://localhost:8000/api/item";
+  const url = "http://localhost:8080/api/item";
   let res = await axios
     .post(url, paramstring, {
       headers: {

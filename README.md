@@ -2,7 +2,11 @@
 
 ## Overview
 
-Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all different kinds of website -- just to sell something? This is a web application where students at RPI can sell/buy second-hand products in 1 centralized place so that everyone's lives can be easier!
+Tired of posting on Facebook, Craigslist, Reddit, Poshmark and all different websites -- just to sell/buy something? This is a web application made for students at RPI to sell/buy second-handed products effortlessly!
+
+**Stack**: *A single-page webapp using React for the frontend (Webpack + Babel Build), Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
+
+![Drag Racing](UI-pics/dashboard.png)
 
 ## Requirement
 
@@ -11,7 +15,7 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
 
 ## Installation
 
-- Install dependencies using `npm install`
+- Install dependencies using `npm install` in the project root, frontend, and server directories.
 
 - cd into the server directory, and run
 
@@ -27,14 +31,22 @@ Tired of posting threads on Facebook, Craigslist, Reddit, Poshmark and all diffe
   npm start
   ```
 
-  in the project root directory and visit `localhost:8080` to view the live application.
+  in the project root directory and visit `localhost:8081` to view the live application.
 
-- Once the application is up and running, you may use the `localhost:8000/api/item` endpoint to access the backend API.
+## Backend API Endpoints
 
-  i.e., `http://localhost:8000/api/item/AC` shall return
+- **Get Items** : /api/item/:key
+- **Create Item**: /api/item
+- **Update/Delete Item**: /api/item/:id
+- **Upload Single File**: /api/file/upload
+- **List All Files**: /api/file/info
+- **Fetch File in Base64**: /api/file/:id
+- **Download File**: /api/file/download/:id
+
+  i.e., `http://localhost:8080/api/item/AC` shall return
 
   ```
-  {"status":"success","data":[{"id":1,"itemname":"AC","price":120,"category":"utility"}],"message":"Retrieved item"}
+  {"status":"success","data":[{"itemname":"AC","price":200,"category":"Home Appliances","descriptions":"used portable AC, originally at $400","imageids":[1]}],"message":"Retrieved item"}
   ```
 
 ## Troubleshooting
