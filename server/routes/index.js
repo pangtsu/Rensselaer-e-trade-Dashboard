@@ -7,6 +7,7 @@ const itemWorker = require('../controllers/queries.js');
 
 /* items */
 
+router.get('/api/item/all', itemWorker.getAllItems);
 router.get('/api/item/:key', itemWorker.getItem);
 router.post('/api/item', itemWorker.createItem);
 router.put('/api/item/:id', itemWorker.updateItem);

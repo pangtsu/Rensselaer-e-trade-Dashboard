@@ -10,6 +10,20 @@ var pgp = require('pg-promise')(options);
 var connectionString = config.server.pgConnection;
 var db = pgp(connectionString);
 
+function getAllItems(req, res, next) {
+    db.many("select * from items")
+        .then(function (data) {
+            res.status(200)
+                .json({
+                    status: 'success',
+                    data: data,
+                    message: 'Retrieved alll items'
+                });
+        })
+        .catch(function (err) {
+            return next(err);
+        });
+}
 
 function getItem(req, res, next) {
     var itemKey = req.params.key;
@@ -85,6 +99,7 @@ function removeItem(req, res, next) {
 
 
 module.exports = {
+    getAllItems:getAllItems,
     getItem: getItem,
     createItem: createItem,
     updateItem: updateItem,
