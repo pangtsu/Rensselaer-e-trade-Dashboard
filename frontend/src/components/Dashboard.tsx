@@ -10,7 +10,6 @@ import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
 import { createItem } from "./../utils/create";
-import { getImage } from "./../utils/getImage";
 import { getAllItems } from "./../utils/getAll";
 
 export interface Props {}
@@ -19,7 +18,7 @@ export interface State {
   searchTerm: string;
   dataArray: any;
   itemParams: any;
-  collapsed: boolean;
+  currentKey: string;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -29,58 +28,50 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: "",
       dataArray: [],
       itemParams: {},
-      collapsed: false
+      currentKey: ""
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
-    this.onCollapse = this.onCollapse.bind(this);
+    this.handleSiderClick = this.handleSiderClick.bind(this);
   }
 
   componentDidMount(){
     this.getAll();
   }
 
-  private onCollapse(){
-    const curr = this.state.collapsed;
-    this.setState({ collapsed : !curr });
-  }
+  handleSiderClick = e => {
+    console.log('click ', e);
+    this.setState({
+      currentKey: e.key,
+    }, () => {
+      console.log(this.state.currentKey);
+    });
+  };
 
   private onSearchHandler(searchInput: any) {
     this.setState({
       searchTerm: searchInput
+    }, () => {
+      this.search();
     });
-    this.search();
   }
 
   private onCreateHandler(itemParams: any) {
     this.setState({
       itemParams: itemParams
-    });
-    this.create();
-  }
-
-  private fetchImage(itemArray: any) {
-    itemArray.forEach(element => {
-      if (element.imageids && element.imageids.length > 0){
-        getImage(element.imageids[0].toString())
-          .then(res => {
-            element.image = res.data;
-          })
-          .catch(error => {
-            console.log(error);
-          });      
-        }
+    }, () =>{
+      this.create();
     });
   }
 
   private getAll() {
     getAllItems()
       .then(res => {
-        this.fetchImage(res.data);
         this.setState({
           dataArray: res.data
+        }, () => {
+          console.log(this.state.dataArray);
         });
-        console.log(this.state.dataArray);
       })
       .catch(error => {
         console.log(error);
@@ -90,11 +81,11 @@ export default class Dashboard extends React.Component<Props, State> {
   private search() {
     searchItem(this.state.searchTerm)
       .then(res => {
-        this.fetchImage(res.data);
         this.setState({
           dataArray: res.data
+        }, () => {
+          console.log(this.state.dataArray);
         });
-        console.log(this.state.dataArray);
       })
       .catch(error => {
         console.log(error);
@@ -139,26 +130,28 @@ export default class Dashboard extends React.Component<Props, State> {
           <Menu
             mode="inline"
             defaultSelectedKeys={[]}
+            selectedKeys={[this.state.currentKey]}
+            onClick={this.handleSiderClick}
             defaultOpenKeys={['sub1', 'sub2', 'sub3']}
             style={{ height: '100%', borderRight: 0 }}
           >
             <SubMenu key="sub1" icon={<BarsOutlined />} title="Category">
-              <Menu.Item key="1">School Supplies</Menu.Item>
-              <Menu.Item key="2">Furnitures</Menu.Item>
-              <Menu.Item key="3">Electronics</Menu.Item>
-              <Menu.Item key="4">Others</Menu.Item>
+              <Menu.Item key="school">School Supplies</Menu.Item>
+              <Menu.Item key="furniture">Furnitures</Menu.Item>
+              <Menu.Item key="electronic">Electronics</Menu.Item>
+              <Menu.Item key="others">Others</Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<HistoryOutlined />} title="Date Posted">
-              <Menu.Item key="5">Today</Menu.Item>
-              <Menu.Item key="6">This Week</Menu.Item>
-              <Menu.Item key="7">This Month</Menu.Item>
-              <Menu.Item key="8">This Year</Menu.Item>
+              <Menu.Item key="today">Today</Menu.Item>
+              <Menu.Item key="week">This Week</Menu.Item>
+              <Menu.Item key="month">This Month</Menu.Item>
+              <Menu.Item key="year">This Year</Menu.Item>
             </SubMenu>
             <SubMenu key="sub3" icon={<DollarOutlined />} title="Price Range">
-              <Menu.Item key="9">Below 50</Menu.Item>
-              <Menu.Item key="10">50-100</Menu.Item>
-              <Menu.Item key="11">100-200</Menu.Item>
-              <Menu.Item key="12">Above 200</Menu.Item>
+              <Menu.Item key="1">Below 50</Menu.Item>
+              <Menu.Item key="50">50-100</Menu.Item>
+              <Menu.Item key="100">100-200</Menu.Item>
+              <Menu.Item key="200">Above 200</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>

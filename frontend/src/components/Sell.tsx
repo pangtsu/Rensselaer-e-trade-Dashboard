@@ -43,8 +43,9 @@ export default class Sell extends React.Component<Props, State> {
   }
 
 private UploadImageHandler(imageIDs: any) {
-  this.setState({imageIDs: imageIDs});
-  console.log("image upload handler: "+this.state.imageIDs);
+  this.setState({imageIDs: imageIDs}, () => {
+    console.log("image upload handler: "+this.state.imageIDs);
+  });
 }
 
   private showModal() {
