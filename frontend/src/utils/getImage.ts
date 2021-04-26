@@ -6,6 +6,5 @@ export async function getImage(imageID: string) {
     headers: { "Access-Control-Allow-Origin": "*" }
   });
   let data = res.data;
-  console.log(data);
   return data;
 }

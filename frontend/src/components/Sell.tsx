@@ -2,7 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import "./App.css";
 import UploadFile from './UploadFile';
-import { Modal, Button, Form, Input, Select, InputNumber } from "antd";
+import { Modal, Button, Form, Input, Select, InputNumber, message } from "antd";
 
 const { Option } = Select;
 
@@ -33,7 +33,7 @@ export default class Sell extends React.Component<Props, State> {
       imageIDs: []
     };
     this.showModal = this.showModal.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.onCategoryChange = this.onCategoryChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
@@ -63,9 +63,13 @@ private UploadImageHandler(imageIDs: any) {
       imageIDs: this.state.imageIDs
     };
     this.props.onSubmitCallBack(params);
+    this.setState({
+      visible: false
+    });
+    message.info('You have inserted an item.');
   }
 
-  private handleCancel() {
+  private handleClear() {
     this.setState({ visible: false, name: "", category: "", price: -1, description: "", imageIDs: []});
   }
 
@@ -101,13 +105,13 @@ private UploadImageHandler(imageIDs: any) {
           visible={visible}
           title="Submit A New Product"
           onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          onCancel={this.handleClear}
           footer={[
-            <Button key="back" onClick={this.handleCancel}>
+            <Button key="back" onClick={this.handleClear}>
               Return
             </Button>,
             <Button
-              key="Cancel"
+              key="submit"
               type="primary"
               loading={loading}
               onClick={this.handleOk}

@@ -4,9 +4,11 @@ CREATE DATABASE item;
 \c item;
 
 CREATE TABLE items (
-  itemName VARCHAR,
+  id SERIAL PRIMARY KEY,
+  itemName VARCHAR NOT NULL,
   price INTEGER,
   category VARCHAR,
   descriptions VARCHAR,
-  imageIDs INTEGER[]
+  imageIDs INTEGER[],
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
   );

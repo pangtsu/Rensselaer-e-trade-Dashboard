@@ -2,20 +2,24 @@ import React from "react";
 import "./App.css";
 import { List, Avatar, Card, Tag } from "antd";
 import { getImage } from "./../utils/getImage";
+import { filterCategory, filterDate, filterPrice } from "./../utils/filter";
 const {Meta} = Card;
 export interface Props {
   dataArray: any;
+  curfilterKey: any;
 }
 
 export interface State {
   currData: any;
+  filteredArray: any;
 }
 
 export default class boardcontent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      currData: []
+      currData: [],
+      filteredArray: []
     };
   }
 
@@ -36,7 +40,8 @@ export default class boardcontent extends React.Component<Props, State> {
 
   componentDidMount(){
     this.setState({
-      currData: this.props.dataArray
+      currData: this.props.dataArray,
+      filteredArray: this.props.dataArray
     });
   }
 
@@ -45,14 +50,37 @@ export default class boardcontent extends React.Component<Props, State> {
     if (this.props.dataArray !== prevProps.dataArray) {
         var tmp = JSON.parse(JSON.stringify(this.props.dataArray));
         this.fetchImage(tmp);
-        this.setState({currData: tmp}, () => {
-          console.log(this.state.currData);
-        });
+        this.setState({currData: tmp, filteredArray: tmp});
+    }
+    if (this.props.curfilterKey !== prevProps.curfilterKey) {
+      if (this.props.curfilterKey.length == 1){ // non-nested menu
+        if (this.props.curfilterKey[0] == "all"){
+          this.setState({filteredArray: this.state.currData});
+        }
+      }
+
+      else{ // nested menu
+        if (this.props.curfilterKey[1] == "category"){
+          console.log(this.props.curfilterKey);
+          const filteredArray = filterCategory(this.state.currData, this.props.curfilterKey[0]);
+          this.setState({filteredArray: filteredArray});
+        }
+        else if (this.props.curfilterKey[1] == "date"){
+          console.log(this.props.curfilterKey);
+          const filteredArray = filterDate(this.state.currData, this.props.curfilterKey[0]);
+          this.setState({filteredArray: filteredArray});
+        }
+        else if (this.props.curfilterKey[1] == "price"){
+          console.log(this.props.curfilterKey);
+          const filteredArray = filterPrice(this.state.currData, this.props.curfilterKey[0]);
+          this.setState({filteredArray: filteredArray});
+        }
+      }
+
     }
   }
 
   render() {
-    console.log(this.props.dataArray);
     return (
       <List
         grid={{ gutter: 5, column: 3 }}
@@ -62,10 +90,10 @@ export default class boardcontent extends React.Component<Props, State> {
           },
           pageSize: 6
         }}
-        dataSource={this.state.currData}
+        dataSource={this.state.filteredArray}
         footer={
           <div>
-            <b>Search Results Found:</b> {this.props.dataArray.length}
+            <b>Search Results Found:</b> {this.state.filteredArray.length}
           </div>
         }
 
@@ -83,6 +111,7 @@ export default class boardcontent extends React.Component<Props, State> {
                  />
                }
                actions={[
+                <Tag color="volcano">{item ? item.created_at.slice(0,10) : "none"}</Tag>,
                 <Tag color="red">{item ? item.category : "none"}</Tag>,
                 <Tag color="gold">{item ? "$"+item.price : "none"}</Tag>
               ]}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb, Typography } from "antd";
-import { HistoryOutlined, DollarOutlined, BarsOutlined } from '@ant-design/icons';
+import { HistoryOutlined, DollarOutlined, BarsOutlined, ShoppingOutlined } from '@ant-design/icons';
 import "./App.css";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -18,7 +18,7 @@ export interface State {
   searchTerm: string;
   dataArray: any;
   itemParams: any;
-  currentKey: string;
+  currentKey: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -28,7 +28,7 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: "",
       dataArray: [],
       itemParams: {},
-      currentKey: ""
+      currentKey: []
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
@@ -40,11 +40,14 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   handleSiderClick = e => {
-    console.log('click ', e);
+    //console.log('click ', e);
+    if (e.key == "all"){
+      this.getAll();
+    }
     this.setState({
-      currentKey: e.key,
+      currentKey: e.keyPath,
     }, () => {
-      console.log(this.state.currentKey);
+      console.log("hey");
     });
   };
 
@@ -93,10 +96,9 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   private create() {
-    console.log(this.state.itemParams);
     createItem(this.state.itemParams)
       .then(res => {
-        console.log(res.data);
+          console.log(res);
       })
       .catch(error => {
         console.log(error);
@@ -132,26 +134,29 @@ export default class Dashboard extends React.Component<Props, State> {
             defaultSelectedKeys={[]}
             selectedKeys={[this.state.currentKey]}
             onClick={this.handleSiderClick}
-            defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+            defaultOpenKeys={['category', 'date', 'price']}
             style={{ height: '100%', borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<BarsOutlined />} title="Category">
-              <Menu.Item key="school">School Supplies</Menu.Item>
-              <Menu.Item key="furniture">Furnitures</Menu.Item>
-              <Menu.Item key="electronic">Electronics</Menu.Item>
-              <Menu.Item key="others">Others</Menu.Item>
+            <Menu.Item key="all" icon={<ShoppingOutlined />}>All products</Menu.Item>
+            <SubMenu key="category" icon={<BarsOutlined />} title="Category">
+              <Menu.Item key="School Supplies">School Supplies</Menu.Item>
+              <Menu.Item key="Furnitures">Furnitures</Menu.Item>
+              <Menu.Item key="Electronic Devices">Electronic Devices</Menu.Item>
+              <Menu.Item key="Clothing">Clothings & Accesories</Menu.Item>
+              <Menu.Item key="Entertainments">Entertainments</Menu.Item>
+              <Menu.Item key="Others">Others</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<HistoryOutlined />} title="Date Posted">
+            <SubMenu key="date" icon={<HistoryOutlined />} title="Date Posted">
               <Menu.Item key="today">Today</Menu.Item>
-              <Menu.Item key="week">This Week</Menu.Item>
-              <Menu.Item key="month">This Month</Menu.Item>
-              <Menu.Item key="year">This Year</Menu.Item>
+              <Menu.Item key="7">Past 7 days</Menu.Item>
+              <Menu.Item key="30">Past 30 days</Menu.Item>
+              <Menu.Item key="183">Past 6 months</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub3" icon={<DollarOutlined />} title="Price Range">
-              <Menu.Item key="1">Below 50</Menu.Item>
-              <Menu.Item key="50">50-100</Menu.Item>
-              <Menu.Item key="100">100-200</Menu.Item>
-              <Menu.Item key="200">Above 200</Menu.Item>
+            <SubMenu key="price" icon={<DollarOutlined />} title="Price Range">
+              <Menu.Item key="0-50">Below 50</Menu.Item>
+              <Menu.Item key="50-100">50-100</Menu.Item>
+              <Menu.Item key="100-200">100-200</Menu.Item>
+              <Menu.Item key="200-x">Above 200</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -170,7 +175,7 @@ export default class Dashboard extends React.Component<Props, State> {
             }}
           >
             <div className="board">
-              <Boardcontent dataArray={this.state.dataArray} />
+              <Boardcontent curfilterKey={this.state.currentKey} dataArray={this.state.dataArray} />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
