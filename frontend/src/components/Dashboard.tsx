@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu, Breadcrumb, Typography } from "antd";
-import { HistoryOutlined, DollarOutlined, BarsOutlined } from '@ant-design/icons';
+import { HistoryOutlined, DollarOutlined, BarsOutlined, ShoppingOutlined } from '@ant-design/icons';
 import "./App.css";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -10,7 +10,6 @@ import Sell from "./Sell";
 import Boardcontent from "./boardcontent";
 import { searchItem } from "./../utils/search";
 import { createItem } from "./../utils/create";
-import { getImage } from "./../utils/getImage";
 import { getAllItems } from "./../utils/getAll";
 
 export interface Props {}
@@ -19,7 +18,9 @@ export interface State {
   searchTerm: string;
   dataArray: any;
   itemParams: any;
-  collapsed: boolean;
+  currentKey: any;
+  AllItems: any;
+  isLoading: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -29,83 +30,93 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: "",
       dataArray: [],
       itemParams: {},
-      collapsed: false
+      currentKey: [],
+      AllItems: [],
+      isLoading: false
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
-    this.onCollapse = this.onCollapse.bind(this);
+    this.handleSiderClick = this.handleSiderClick.bind(this);
   }
 
   componentDidMount(){
     this.getAll();
   }
 
-  private onCollapse(){
-    const curr = this.state.collapsed;
-    this.setState({ collapsed : !curr });
-  }
+  handleSiderClick = e => {
+    //console.log('click ', e);
+    if (e.key == "all"){
+      this.getAll();
+    }
+    this.setState({
+      dataArray: this.state.AllItems,
+      currentKey: e.keyPath,
+    }, () => {
+      console.log("hey");
+    });
+  };
 
   private onSearchHandler(searchInput: any) {
     this.setState({
       searchTerm: searchInput
+    }, () => {
+      this.search();
     });
-    this.search();
   }
 
   private onCreateHandler(itemParams: any) {
     this.setState({
       itemParams: itemParams
-    });
-    this.create();
-  }
-
-  private fetchImage(itemArray: any) {
-    itemArray.forEach(element => {
-      if (element.imageids && element.imageids.length > 0){
-        getImage(element.imageids[0].toString())
-          .then(res => {
-            element.image = res.data;
-          })
-          .catch(error => {
-            console.log(error);
-          });      
-        }
+    }, () =>{
+      this.create();
     });
   }
 
   private getAll() {
-    getAllItems()
+    this.setState({
+      isLoading: true
+    }, () =>{
+      getAllItems()
       .then(res => {
-        this.fetchImage(res.data);
         this.setState({
-          dataArray: res.data
+          dataArray: res.data,
+          AllItems: res.data,
+          isLoading: false
+        }, () => {
+          console.log(this.state.dataArray);
         });
-        console.log(this.state.dataArray);
       })
       .catch(error => {
         console.log(error);
       });
+    });
   }
+
+  
   
   private search() {
-    searchItem(this.state.searchTerm)
+    this.setState({
+      isLoading: true
+    }, () =>{
+      searchItem(this.state.searchTerm)
       .then(res => {
-        this.fetchImage(res.data);
         this.setState({
-          dataArray: res.data
+          dataArray: res.data,
+          isLoading: false
+        }, () => {
+          console.log(this.state.dataArray);
         });
-        console.log(this.state.dataArray);
       })
       .catch(error => {
         console.log(error);
       });
+    });
   }
 
   private create() {
-    console.log(this.state.itemParams);
     createItem(this.state.itemParams)
       .then(res => {
-        console.log(res.data);
+          console.log(res);
       })
       .catch(error => {
         console.log(error);
@@ -113,6 +124,7 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   render() {
+    
     return (
       <Layout>
       <Header className="site-layout-background" style={{ padding: 0 }}>
@@ -139,26 +151,31 @@ export default class Dashboard extends React.Component<Props, State> {
           <Menu
             mode="inline"
             defaultSelectedKeys={[]}
-            defaultOpenKeys={['sub1', 'sub2', 'sub3']}
+            selectedKeys={[this.state.currentKey]}
+            onClick={this.handleSiderClick}
+            defaultOpenKeys={['category', 'date', 'price']}
             style={{ height: '100%', borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<BarsOutlined />} title="Category">
-              <Menu.Item key="1">School Supplies</Menu.Item>
-              <Menu.Item key="2">Furnitures</Menu.Item>
-              <Menu.Item key="3">Electronics</Menu.Item>
-              <Menu.Item key="4">Others</Menu.Item>
+            <Menu.Item key="all" icon={<ShoppingOutlined />}>All products</Menu.Item>
+            <SubMenu key="category" icon={<BarsOutlined />} title="Category">
+              <Menu.Item key="School Supplies">School Supplies</Menu.Item>
+              <Menu.Item key="Furnitures">Furnitures</Menu.Item>
+              <Menu.Item key="Electronic Devices">Electronic Devices</Menu.Item>
+              <Menu.Item key="Clothing">Clothings & Accesories</Menu.Item>
+              <Menu.Item key="Entertainments">Entertainments</Menu.Item>
+              <Menu.Item key="Others">Others</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<HistoryOutlined />} title="Date Posted">
-              <Menu.Item key="5">Today</Menu.Item>
-              <Menu.Item key="6">This Week</Menu.Item>
-              <Menu.Item key="7">This Month</Menu.Item>
-              <Menu.Item key="8">This Year</Menu.Item>
+            <SubMenu key="date" icon={<HistoryOutlined />} title="Date Posted">
+              <Menu.Item key="today">Today</Menu.Item>
+              <Menu.Item key="7">Past 7 days</Menu.Item>
+              <Menu.Item key="30">Past 30 days</Menu.Item>
+              <Menu.Item key="183">Past 6 months</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub3" icon={<DollarOutlined />} title="Price Range">
-              <Menu.Item key="9">Below 50</Menu.Item>
-              <Menu.Item key="10">50-100</Menu.Item>
-              <Menu.Item key="11">100-200</Menu.Item>
-              <Menu.Item key="12">Above 200</Menu.Item>
+            <SubMenu key="price" icon={<DollarOutlined />} title="Price Range">
+              <Menu.Item key="0-50">Below 50</Menu.Item>
+              <Menu.Item key="50-100">50-100</Menu.Item>
+              <Menu.Item key="100-200">100-200</Menu.Item>
+              <Menu.Item key="200-x">Above 200</Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -177,7 +194,7 @@ export default class Dashboard extends React.Component<Props, State> {
             }}
           >
             <div className="board">
-              <Boardcontent dataArray={this.state.dataArray} />
+              <Boardcontent curFilterKey={this.state.currentKey} isArrayLoading={this.state.isLoading} dataArray={this.state.dataArray} />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>

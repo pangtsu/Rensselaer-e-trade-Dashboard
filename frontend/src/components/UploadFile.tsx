@@ -39,8 +39,9 @@ export default class UploadFile extends React.Component<Props, State> {
       fileId.push(obj.res);
     }
 
-    this.setState({ fileList });
-    this.props.onUploadCallBack(fileId);
+    this.setState({ fileList }, () =>{
+      this.props.onUploadCallBack(fileId);
+    });
   };
   
 

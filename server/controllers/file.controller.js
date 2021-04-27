@@ -35,7 +35,7 @@ exports.fetchFile = (req, res) => {
 		.json({
 			status: 'success',
 			data: new Buffer(file.data).toString('base64'),
-			message: 'Downloaded item'
+			message: 'Fetched item'
 		});
 	}).catch(err => {
 		console.log(err);
