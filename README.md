@@ -6,8 +6,6 @@ Tired of posting on Facebook, Craigslist, Reddit, Poshmark and all different web
 
 **Stack**: *A single-page webapp using React for the frontend (Webpack + Babel Build), Nodejs (Multer Middleware & Sequelize ORM) and PostgreSQL for the backend to perform basic CRUD operation.*
 
-![Drag Racing](UI-pics/dashboard.png)
-
 ## Requirement
 
 - node
