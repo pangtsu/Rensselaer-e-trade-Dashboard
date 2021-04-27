@@ -15,8 +15,6 @@ export function filterDate(inputArray: any, filterKey: string) {
         inputArray.forEach(element => {
             var today = new Date().toISOString().slice(0, 10);
             const ts = element.created_at.slice(0,10);
-            console.log(today);
-            console.log(ts);
             if (ts == today){
                 filteredArray.push(element);
             }

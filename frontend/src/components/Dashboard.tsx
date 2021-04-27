@@ -19,6 +19,7 @@ export interface State {
   dataArray: any;
   itemParams: any;
   currentKey: any;
+  AllItems: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -28,7 +29,8 @@ export default class Dashboard extends React.Component<Props, State> {
       searchTerm: "",
       dataArray: [],
       itemParams: {},
-      currentKey: []
+      currentKey: [],
+      AllItems: []
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
@@ -45,6 +47,7 @@ export default class Dashboard extends React.Component<Props, State> {
       this.getAll();
     }
     this.setState({
+      dataArray: this.state.AllItems,
       currentKey: e.keyPath,
     }, () => {
       console.log("hey");
@@ -71,7 +74,8 @@ export default class Dashboard extends React.Component<Props, State> {
     getAllItems()
       .then(res => {
         this.setState({
-          dataArray: res.data
+          dataArray: res.data,
+          AllItems: res.data
         }, () => {
           console.log(this.state.dataArray);
         });

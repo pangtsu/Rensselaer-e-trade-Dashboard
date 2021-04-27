@@ -141,7 +141,6 @@ private UploadImageHandler(imageIDs: any) {
                 <Option value="Electronic Devices">Electronic Devices</Option>
                 <Option value="Clothing">Clothings & Accesories</Option>
                 <Option value="School Supplies">School Supplies</Option>
-                <Option value="Home Appliances">Home Appliances</Option>
                 <Option value="Entertainments">Entertainments</Option>
                 <Option value="Others">Others</Option>
 
