@@ -20,6 +20,7 @@ export interface State {
   itemParams: any;
   currentKey: any;
   AllItems: any;
+  isLoading: any;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
@@ -30,7 +31,8 @@ export default class Dashboard extends React.Component<Props, State> {
       dataArray: [],
       itemParams: {},
       currentKey: [],
-      AllItems: []
+      AllItems: [],
+      isLoading: false
     };
     this.onSearchHandler = this.onSearchHandler.bind(this);
     this.onCreateHandler = this.onCreateHandler.bind(this);
@@ -71,11 +73,15 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   private getAll() {
-    getAllItems()
+    this.setState({
+      isLoading: true
+    }, () =>{
+      getAllItems()
       .then(res => {
         this.setState({
           dataArray: res.data,
-          AllItems: res.data
+          AllItems: res.data,
+          isLoading: false
         }, () => {
           console.log(this.state.dataArray);
         });
@@ -83,13 +89,20 @@ export default class Dashboard extends React.Component<Props, State> {
       .catch(error => {
         console.log(error);
       });
+    });
   }
+
+  
   
   private search() {
-    searchItem(this.state.searchTerm)
+    this.setState({
+      isLoading: true
+    }, () =>{
+      searchItem(this.state.searchTerm)
       .then(res => {
         this.setState({
-          dataArray: res.data
+          dataArray: res.data,
+          isLoading: false
         }, () => {
           console.log(this.state.dataArray);
         });
@@ -97,6 +110,7 @@ export default class Dashboard extends React.Component<Props, State> {
       .catch(error => {
         console.log(error);
       });
+    });
   }
 
   private create() {
@@ -110,6 +124,7 @@ export default class Dashboard extends React.Component<Props, State> {
   }
 
   render() {
+    
     return (
       <Layout>
       <Header className="site-layout-background" style={{ padding: 0 }}>
@@ -179,7 +194,7 @@ export default class Dashboard extends React.Component<Props, State> {
             }}
           >
             <div className="board">
-              <Boardcontent curfilterKey={this.state.currentKey} dataArray={this.state.dataArray} />
+              <Boardcontent curFilterKey={this.state.currentKey} isArrayLoading={this.state.isLoading} dataArray={this.state.dataArray} />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>

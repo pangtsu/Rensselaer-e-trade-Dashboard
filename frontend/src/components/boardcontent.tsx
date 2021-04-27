@@ -1,17 +1,19 @@
 import React from "react";
 import "./App.css";
-import { List, Avatar, Card, Tag } from "antd";
+import { List, Avatar, Card, Tag, Spin } from "antd";
 import { getImage } from "./../utils/getImage";
 import { filterCategory, filterDate, filterPrice } from "./../utils/filter";
 const {Meta} = Card;
 export interface Props {
   dataArray: any;
-  curfilterKey: any;
+  curFilterKey: any;
+  isArrayLoading: boolean;
 }
 
 export interface State {
   currData: any;
-  filteredArray: any;
+  filteredData: any;
+  loading: boolean;
 }
 
 export default class boardcontent extends React.Component<Props, State> {
@@ -19,7 +21,8 @@ export default class boardcontent extends React.Component<Props, State> {
     super(props);
     this.state = {
       currData: [],
-      filteredArray: []
+      filteredData: [],
+      loading: false
     };
   }
 
@@ -27,13 +30,22 @@ export default class boardcontent extends React.Component<Props, State> {
   private fetchImage(itemArray: any) {
     itemArray.forEach(element => {
       if (element.imageids && element.imageids.length > 0){
-        getImage(element.imageids[0].toString())
+        this.setState({
+          loading: true
+        }, () =>{
+          getImage(element.imageids[0].toString())
           .then(res => {
             element.image = res.data;
+            this.setState({
+              loading: false
+            }, () => {
+              console.log(this.state.loading);
+            });
           })
           .catch(error => {
             console.log(error);
-          });      
+          });  
+        });   
         }
     });
   }
@@ -41,7 +53,7 @@ export default class boardcontent extends React.Component<Props, State> {
   componentDidMount(){
     this.setState({
       currData: this.props.dataArray,
-      filteredArray: this.props.dataArray
+      filteredData: this.props.dataArray,
     });
   }
 
@@ -50,30 +62,33 @@ export default class boardcontent extends React.Component<Props, State> {
     if (this.props.dataArray !== prevProps.dataArray) {
         var tmp = JSON.parse(JSON.stringify(this.props.dataArray));
         this.fetchImage(tmp);
-        this.setState({currData: tmp, filteredArray: tmp});
+        this.setState({currData: tmp, filteredData: tmp});
     }
-    if (this.props.curfilterKey !== prevProps.curfilterKey) {
-      if (this.props.curfilterKey.length == 1){ // non-nested menu
-        if (this.props.curfilterKey[0] == "all"){
-          this.setState({filteredArray: this.state.currData});
+    if (this.props.isArrayLoading !== prevProps.isArrayLoading) {
+      this.setState({loading:this.props.isArrayLoading});
+  }
+    if (this.props.curFilterKey !== prevProps.curFilterKey) {
+      if (this.props.curFilterKey.length == 1){ // non-nested menu
+        if (this.props.curFilterKey[0] == "all"){
+          this.setState({filteredData: this.state.currData});
         }
       }
 
       else{ // nested menu
-        if (this.props.curfilterKey[1] == "category"){
-          console.log(this.props.curfilterKey);
-          const filteredArray = filterCategory(this.state.currData, this.props.curfilterKey[0]);
-          this.setState({filteredArray: filteredArray});
+        if (this.props.curFilterKey[1] == "category"){
+          console.log(this.props.curFilterKey);
+          const filteredData = filterCategory(this.state.currData, this.props.curFilterKey[0]);
+          this.setState({filteredData: filteredData});
         }
-        else if (this.props.curfilterKey[1] == "date"){
-          console.log(this.props.curfilterKey);
-          const filteredArray = filterDate(this.state.currData, this.props.curfilterKey[0]);
-          this.setState({filteredArray: filteredArray});
+        else if (this.props.curFilterKey[1] == "date"){
+          console.log(this.props.curFilterKey);
+          const filteredData = filterDate(this.state.currData, this.props.curFilterKey[0]);
+          this.setState({filteredData: filteredData});
         }
-        else if (this.props.curfilterKey[1] == "price"){
-          console.log(this.props.curfilterKey);
-          const filteredArray = filterPrice(this.state.currData, this.props.curfilterKey[0]);
-          this.setState({filteredArray: filteredArray});
+        else if (this.props.curFilterKey[1] == "price"){
+          console.log(this.props.curFilterKey);
+          const filteredData = filterPrice(this.state.currData, this.props.curFilterKey[0]);
+          this.setState({filteredData: filteredData});
         }
       }
 
@@ -81,6 +96,12 @@ export default class boardcontent extends React.Component<Props, State> {
   }
 
   render() {
+    if (this.state.loading) return(
+      <div className="example">
+      <Spin size="large" />
+      </div> 
+    );
+
     return (
       <List
         grid={{ gutter: 5, column: 3 }}
@@ -90,10 +111,10 @@ export default class boardcontent extends React.Component<Props, State> {
           },
           pageSize: 6
         }}
-        dataSource={this.state.filteredArray}
+        dataSource={this.state.filteredData}
         footer={
           <div>
-            <b>Search Results Found:</b> {this.state.filteredArray.length}
+            <b>Search Results Found:</b> {this.state.filteredData.length}
           </div>
         }
 
